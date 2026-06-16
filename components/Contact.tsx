@@ -6,7 +6,7 @@ import { HiMail, HiPhone } from "react-icons/hi";
 
 const links = [
   { label:"Email",    value:"sohambhattacharjee84@gmail.com",       href:"mailto:sohambhattacharjee84@gmail.com",       Icon:HiMail,        color:"#2563eb" },
-  { label:"GitHub",   value:"github.com/SohamBhattacharjee2003",    href:"https://github.com/SohamBhattacharjee2003",   Icon:SiGithub,      color:"#f2f2f2" },
+  { label:"GitHub",   value:"github.com/SohamBhattacharjee2003",    href:"https://github.com/SohamBhattacharjee2003",   Icon:SiGithub,      color:"var(--text)" },
   { label:"LinkedIn", value:"linkedin.com/in/sohambhattacharjee84",  href:"https://linkedin.com/in/sohambhattacharjee84", Icon:FaLinkedinIn,  color:"#0a66c2" },
   { label:"Phone",    value:"+91 98323 05604",                       href:"tel:+919832305604",                           Icon:HiPhone,       color:"#22c55e" },
 ];

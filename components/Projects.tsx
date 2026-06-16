@@ -96,7 +96,7 @@ function BrowserMockup({ darkGradient, lightGradient, accent, date }: { darkGrad
           </div>
         </div>
 
-        <div style={{ position:"absolute", top:10, right:10, background:"rgba(0,0,0,0.5)", border:"1px solid rgba(255,255,255,0.1)", borderRadius:4, padding:"3px 8px", fontSize:10, fontWeight:600, color:"#aaa", backdropFilter:"blur(8px)" }}>
+        <div style={{ position:"absolute", top:10, right:10, background:"var(--bg-elevated)", border:"1px solid var(--border)", borderRadius:4, padding:"3px 8px", fontSize:10, fontWeight:600, color:"var(--text-muted)", backdropFilter:"blur(8px)" }}>
           {date}
         </div>
 
