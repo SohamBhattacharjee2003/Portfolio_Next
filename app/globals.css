@@ -88,8 +88,8 @@ body {
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
 }
-.marquee { animation: marquee 28s linear infinite; }
-.marquee-reverse { animation: marquee-reverse 28s linear infinite; }
+.marquee { animation: marquee 22s linear infinite; }
+.marquee-reverse { animation: marquee-reverse 22s linear infinite; }
 
 /* ─── Divider line ─── */
 .divider {
