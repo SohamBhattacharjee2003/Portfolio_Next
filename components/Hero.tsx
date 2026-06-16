@@ -5,11 +5,12 @@ import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa";
 
 const roles = ["Full-Stack Developer", "Mobile Engineer", "AI Builder", "Open Source Contributor"];
+const stack = ["TypeScript", "Next.js", "Flutter", "Node", "Python", "AWS"];
 
 export default function Hero() {
-  const [typed, setTyped]   = useState("");
-  const [roleIdx, setRole]  = useState(0);
-  const [del, setDel]       = useState(false);
+  const [typed, setTyped]  = useState("");
+  const [roleIdx, setRole] = useState(0);
+  const [del, setDel]      = useState(false);
 
   useEffect(() => {
     const word  = roles[roleIdx];
@@ -27,176 +28,170 @@ export default function Hero() {
   }
 
   return (
-    <section id="hero" style={{ background: "var(--bg)", minHeight: "100vh", paddingBottom: 80 }}>
+    <section id="hero" style={{ background: "var(--bg)" }}>
 
-      {/* ── BANNER + PHOTO ── */}
-      <div style={{ position: "relative" }}>
-
-        {/* Banner */}
-        <div style={{
-          marginTop: 72,
-          marginLeft: 20,
-          marginRight: 20,
-          height: 380,
-          borderRadius: 20,
+      {/* ── BANNER ── */}
+      <div className="container" style={{ paddingTop: 92 }}>
+        <div className="hero-banner" style={{
+          height: 300,
+          borderRadius: 18,
           overflow: "hidden",
           position: "relative",
-          background: "linear-gradient(155deg, #050a14 0%, #0c1628 28%, #0a1f35 55%, #100726 80%, #040609 100%)",
+          background: "linear-gradient(150deg, #050a14 0%, #0c1628 30%, #0a1f35 56%, #100726 82%, #040609 100%)",
         }}>
-          {/* Blurred orbs */}
-          <div style={{ position:"absolute", top:-90, right:60, width:420, height:420, borderRadius:"50%", background:"radial-gradient(circle,rgba(37,99,235,0.28) 0%,transparent 70%)", filter:"blur(60px)", animation:"bFloat 13s ease-in-out infinite" }} />
-          <div style={{ position:"absolute", bottom:-80, right:260, width:320, height:320, borderRadius:"50%", background:"radial-gradient(circle,rgba(124,58,237,0.32) 0%,transparent 70%)", filter:"blur(50px)", animation:"bFloat 18s ease-in-out infinite reverse" }} />
-          <div style={{ position:"absolute", top:"35%", right:"18%", width:180, height:180, borderRadius:"50%", background:"radial-gradient(circle,rgba(6,182,212,0.18) 0%,transparent 70%)", filter:"blur(36px)" }} />
+          <div style={{ position:"absolute", top:-80, right:80, width:380, height:380, borderRadius:"50%", background:"radial-gradient(circle,rgba(37,99,235,0.30) 0%,transparent 70%)", filter:"blur(56px)", animation:"bFloat 13s ease-in-out infinite" }} />
+          <div style={{ position:"absolute", bottom:-70, right:240, width:280, height:280, borderRadius:"50%", background:"radial-gradient(circle,rgba(124,58,237,0.34) 0%,transparent 70%)", filter:"blur(46px)", animation:"bFloat 18s ease-in-out infinite reverse" }} />
+          <div style={{ position:"absolute", inset:0, backgroundImage:"radial-gradient(rgba(255,255,255,0.05) 1px,transparent 1px)", backgroundSize:"26px 26px", pointerEvents:"none" }} />
 
-          {/* Subtle dot grid */}
-          <div style={{ position:"absolute", inset:0, backgroundImage:"radial-gradient(rgba(255,255,255,0.06) 1px,transparent 1px)", backgroundSize:"28px 28px", pointerEvents:"none" }} />
-
-          {/* Geometric SVG — right side */}
-          <svg style={{ position:"absolute", right:64, top:"50%", transform:"translateY(-50%)", opacity:0.1, animation:"bSpin 60s linear infinite" }} width="270" height="270" viewBox="0 0 270 270" fill="none">
-            <circle cx="135" cy="135" r="128" stroke="white" strokeWidth="0.5"/>
-            <circle cx="135" cy="135" r="92"  stroke="white" strokeWidth="0.5" strokeDasharray="3 10"/>
-            <circle cx="135" cy="135" r="56"  stroke="white" strokeWidth="0.5"/>
-            <circle cx="135" cy="135" r="22"  stroke="white" strokeWidth="1.2"/>
-            <line x1="7"   y1="135" x2="263" y2="135" stroke="white" strokeWidth="0.4"/>
-            <line x1="135" y1="7"   x2="135" y2="263" stroke="white" strokeWidth="0.4"/>
-            <line x1="39"  y1="39"  x2="231" y2="231" stroke="white" strokeWidth="0.3" strokeDasharray="2 8"/>
-            <line x1="231" y1="39"  x2="39"  y2="231" stroke="white" strokeWidth="0.3" strokeDasharray="2 8"/>
+          <svg style={{ position:"absolute", right:56, top:"50%", transform:"translateY(-50%)", opacity:0.1, animation:"bSpin 60s linear infinite" }} width="230" height="230" viewBox="0 0 230 230" fill="none">
+            <circle cx="115" cy="115" r="110" stroke="white" strokeWidth="0.5"/>
+            <circle cx="115" cy="115" r="78"  stroke="white" strokeWidth="0.5" strokeDasharray="3 10"/>
+            <circle cx="115" cy="115" r="46"  stroke="white" strokeWidth="0.5"/>
+            <circle cx="115" cy="115" r="18"  stroke="white" strokeWidth="1.2"/>
+            <line x1="5" y1="115" x2="225" y2="115" stroke="white" strokeWidth="0.4"/>
+            <line x1="115" y1="5" x2="115" y2="225" stroke="white" strokeWidth="0.4"/>
           </svg>
 
-          {/* Code glyphs */}
-          {([
-            { t:"{ }",  top:"14%", left:"8%",  op:0.07, fs:22 },
-            { t:"</>",  top:"62%", left:"28%", op:0.06, fs:17 },
-            { t:"=>",   top:"22%", left:"52%", op:0.07, fs:19 },
-            { t:"[ ]",  top:"70%", left:"65%", op:0.05, fs:16 },
-            { t:"···",  top:"40%", left:"16%", op:0.06, fs:20 },
-          ] as { t:string; top:string; left:string; op:number; fs:number }[]).map(({ t, top, left, op, fs }) => (
-            <div key={t} style={{ position:"absolute", top, left, color:"#fff", opacity:op, fontSize:fs, fontFamily:"monospace", fontWeight:700, pointerEvents:"none" }}>
-              {t}
+          {/* Banner heading — sits in the empty right space, original treatment */}
+          <div style={{ position:"absolute", top:40, left:44, maxWidth:"60%" }}>
+            <div style={{ fontSize:10, fontWeight:700, letterSpacing:"0.38em", textTransform:"uppercase", color:"rgba(255,255,255,0.4)", marginBottom:14 }}>
+              Software Engineer
             </div>
-          ))}
-
-          {/* Bottom label strip */}
-          <div style={{ position:"absolute", bottom:0, left:0, right:0, height:64, background:"linear-gradient(to top,rgba(0,0,0,0.45),transparent)", display:"flex", alignItems:"flex-end", paddingBottom:18, paddingLeft:200, gap:12, pointerEvents:"none" }}>
-            <span style={{ fontSize:9, fontWeight:700, letterSpacing:"0.35em", textTransform:"uppercase", color:"rgba(255,255,255,0.22)" }}>
-              Full Stack · Mobile · AI · Open Source
-            </span>
+            <div style={{ fontFamily:"var(--font-serif)", fontStyle:"italic", fontWeight:400, fontSize:"clamp(26px,3.4vw,46px)", lineHeight:1.05, color:"rgba(255,255,255,0.92)" }}>
+              I build things<br/>for the web &amp; beyond.
+            </div>
           </div>
-        </div>
 
-        {/* Profile photo — overlapping bottom of banner */}
-        <div style={{
-          position: "absolute",
-          bottom: -65,
-          left: 60,
-          width: 130, height: 130,
-          borderRadius: "50%",
-          overflow: "hidden",
-          border: "5px solid var(--bg)",
-          boxShadow: "0 0 0 1px var(--border), 0 8px 32px rgba(0,0,0,0.3)",
-          zIndex: 10,
-          transition: "border-color 0.35s",
-        }}>
-          <Image src="/profile.png" alt="Soham Bhattacharjee" fill style={{ objectFit:"cover", objectPosition:"center top" }} priority />
+          {([
+            { t:"{ }",  top:"20%", right:"34%", op:0.06, fs:18 },
+            { t:"</>",  top:"66%", left:"30%",  op:0.05, fs:15 },
+            { t:"=>",   top:"30%", right:"22%", op:0.06, fs:16 },
+          ] as { t:string; top:string; right?:string; left?:string; op:number; fs:number }[]).map(({ t, top, right, left, op, fs }) => (
+            <div key={t} style={{ position:"absolute", top, right, left, color:"#fff", opacity:op, fontSize:fs, fontFamily:"monospace", fontWeight:700, pointerEvents:"none" }}>{t}</div>
+          ))}
         </div>
       </div>
 
-      {/* ── TEXT ── */}
-      <div className="container" style={{ paddingTop: 104, paddingBottom: 0 }}>
-
-        {/* Name */}
-        <h1 style={{
-          fontFamily: "var(--font-serif)",
-          fontStyle: "italic",
-          fontWeight: 400,
-          fontSize: "clamp(44px,5.8vw,84px)",
-          lineHeight: 1.04,
-          color: "var(--text)",
-          letterSpacing: "-0.015em",
-          marginBottom: 18,
-        }}>
-          Soham Bhattacharjee
-        </h1>
-
-        {/* Tagline — mixed serif + sans */}
-        <div style={{ marginBottom: 28 }}>
-          <div style={{
-            fontFamily: "var(--font-serif)",
-            fontStyle: "italic",
-            fontWeight: 300,
-            fontSize: "clamp(22px,2.8vw,42px)",
-            color: "var(--text-muted)",
-            lineHeight: 1,
-          }}>
-            Building Scalable,
+      {/* ── IDENTITY ROW: photo + name inline ── */}
+      <div className="container">
+        <div className="hero-id">
+          <div className="hero-photo">
+            <Image src="/profile.png" alt="Soham Bhattacharjee" fill style={{ objectFit:"cover", objectPosition:"center top" }} priority />
           </div>
-          <div style={{
-            fontFamily: "var(--font-sans)",
-            fontWeight: 700,
-            fontSize: "clamp(28px,3.8vw,62px)",
-            color: "var(--text)",
-            lineHeight: 1.04,
-            letterSpacing: "-0.025em",
-          }}>
-            Digital Products.
+          <div className="hero-id-text">
+            <h1 className="hero-name">SOHAM BHATTACHARJEE</h1>
+            <div className="hero-type">
+              <span style={{ width:6, height:6, borderRadius:"50%", background:"var(--accent-green)", boxShadow:"0 0 8px var(--accent-green)", flexShrink:0, display:"inline-block" }} />
+              <span>{typed}<span className="hero-caret" /></span>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Typed role */}
-        <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:24, minHeight:24 }}>
-          <span style={{ width:6, height:6, borderRadius:"50%", background:"var(--accent-green)", boxShadow:"0 0 8px var(--accent-green)", flexShrink:0, display:"inline-block" }} />
-          <span style={{ fontSize:13, color:"var(--text-muted)", fontWeight:400 }}>
-            {typed}
-            <span style={{ display:"inline-block", width:2, height:13, background:"var(--accent)", marginLeft:2, verticalAlign:"middle", animation:"bBlink 0.9s step-end infinite" }} />
-          </span>
-        </div>
+      {/* ── LOWER: two columns to kill vertical stretch ── */}
+      <div className="container" style={{ paddingBottom: 64 }}>
+        <div className="hero-grid">
 
-        {/* Bio */}
-        <p style={{ fontSize:15, color:"var(--text-muted)", lineHeight:1.85, maxWidth:600, marginBottom:36 }}>
-          Full-stack engineer and hackathon finalist shipping across web, mobile &amp; AI. From WebRTC collaborative IDEs to OpenAI-powered platforms and cross-platform Flutter apps — I care about clean architecture, real-time systems, and production-ready code.
-        </p>
+          {/* Left — statement + bio + CTAs */}
+          <div>
+            <h2 className="hero-statement">
+              Building <span className="hero-serif">scalable</span> digital products <span className="hero-dim">end&nbsp;to&nbsp;end.</span>
+            </h2>
 
-        {/* CTAs + social icons */}
-        <div style={{ display:"flex", alignItems:"center", gap:10, flexWrap:"wrap", marginBottom:52 }}>
-          <a href="#projects"
-            style={{ display:"inline-flex", alignItems:"center", gap:8, background:"var(--text)", color:"var(--bg)", fontSize:11, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase", padding:"13px 28px", borderRadius:40, textDecoration:"none", transition:"opacity 0.2s" }}
-            onMouseEnter={e => hOn(e, { opacity:"0.8" })} onMouseLeave={e => hOn(e, { opacity:"1" })}>
-            View Projects →
-          </a>
-          <a href="#contact"
-            style={{ display:"inline-flex", alignItems:"center", fontSize:11, fontWeight:600, letterSpacing:"0.12em", textTransform:"uppercase", color:"var(--text-muted)", textDecoration:"none", border:"1px solid var(--border)", padding:"13px 28px", borderRadius:40, transition:"color 0.2s,border-color 0.2s" }}
-            onMouseEnter={e => { hOn(e, { color:"var(--text)", borderColor:"var(--text)" }); }}
-            onMouseLeave={e => { hOn(e, { color:"var(--text-muted)", borderColor:"var(--border)" }); }}>
-            Get in Touch
-          </a>
-          <div style={{ width:1, height:22, background:"var(--border)", margin:"0 4px" }} />
-          <a href="https://github.com/SohamBhattacharjee2003" target="_blank" rel="noreferrer"
-            style={{ width:38, height:38, borderRadius:"50%", border:"1px solid var(--border)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--text-muted)", textDecoration:"none", transition:"color 0.2s,border-color 0.2s" }}
-            onMouseEnter={e => { hOn(e, { color:"var(--text)", borderColor:"var(--text)" }); }}
-            onMouseLeave={e => { hOn(e, { color:"var(--text-muted)", borderColor:"var(--border)" }); }}>
-            <SiGithub size={16} />
-          </a>
-          <a href="https://linkedin.com/in/sohambhattacharjee84" target="_blank" rel="noreferrer"
-            style={{ width:38, height:38, borderRadius:"50%", border:"1px solid var(--border)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--text-muted)", textDecoration:"none", transition:"color 0.2s,border-color 0.2s" }}
-            onMouseEnter={e => { hOn(e, { color:"#0a66c2", borderColor:"#0a66c2" }); }}
-            onMouseLeave={e => { hOn(e, { color:"var(--text-muted)", borderColor:"var(--border)" }); }}>
-            <FaLinkedinIn size={15} />
-          </a>
-        </div>
+            <p className="hero-bio">
+              Full-stack engineer &amp; hackathon finalist shipping across web, mobile and AI — WebRTC collaborative IDEs, OpenAI-powered platforms, cross-platform Flutter apps. I care about clean architecture and production-ready code.
+            </p>
 
-        {/* Location */}
-        <div style={{ display:"flex", alignItems:"center", gap:8, fontSize:11, fontWeight:600, letterSpacing:"0.25em", textTransform:"uppercase", color:"var(--text-faint)" }}>
-          <svg width="10" height="13" viewBox="0 0 10 13" fill="currentColor">
-            <path d="M5 0C2.24 0 0 2.24 0 5c0 3.75 5 8 5 8s5-4.25 5-8c0-2.76-2.24-5-5-5zm0 6.5C4.17 6.5 3.5 5.83 3.5 5S4.17 3.5 5 3.5 6.5 4.17 6.5 5 5.83 6.5 5 6.5z"/>
-          </svg>
-          Kolkata, India · Available for Work
+            <div className="hero-ctas">
+              <a href="#projects" className="hero-btn-solid"
+                onMouseEnter={e => hOn(e, { opacity:"0.82" })} onMouseLeave={e => hOn(e, { opacity:"1" })}>
+                View Projects →
+              </a>
+              <a href="#contact" className="hero-btn-ghost"
+                onMouseEnter={e => hOn(e, { color:"var(--text)", borderColor:"var(--text)" })}
+                onMouseLeave={e => hOn(e, { color:"var(--text-muted)", borderColor:"var(--border)" })}>
+                Get in Touch
+              </a>
+              <a href="https://github.com/SohamBhattacharjee2003" target="_blank" rel="noreferrer" className="hero-icon"
+                onMouseEnter={e => hOn(e, { color:"var(--text)", borderColor:"var(--text)" })}
+                onMouseLeave={e => hOn(e, { color:"var(--text-muted)", borderColor:"var(--border)" })}>
+                <SiGithub size={15} />
+              </a>
+              <a href="https://linkedin.com/in/sohambhattacharjee84" target="_blank" rel="noreferrer" className="hero-icon"
+                onMouseEnter={e => hOn(e, { color:"#0a66c2", borderColor:"#0a66c2" })}
+                onMouseLeave={e => hOn(e, { color:"var(--text-muted)", borderColor:"var(--border)" })}>
+                <FaLinkedinIn size={14} />
+              </a>
+            </div>
+          </div>
+
+          {/* Right — compact meta card */}
+          <aside className="hero-meta">
+            <div className="hero-meta-row">
+              <span className="hero-meta-k">Location</span>
+              <span className="hero-meta-v">Kolkata, India</span>
+            </div>
+            <div className="hero-meta-row">
+              <span className="hero-meta-k">Status</span>
+              <span className="hero-meta-v" style={{ color:"var(--accent-green)" }}>Available for work</span>
+            </div>
+            <div className="hero-meta-row">
+              <span className="hero-meta-k">Focus</span>
+              <span className="hero-meta-v">Web · Mobile · AI</span>
+            </div>
+            <div className="hero-meta-stack">
+              {stack.map(s => <span key={s} className="hero-chip">{s}</span>)}
+            </div>
+          </aside>
         </div>
       </div>
 
       <style>{`
-        @keyframes bFloat { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-22px)} }
+        @keyframes bFloat { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-20px)} }
         @keyframes bSpin  { to{transform:translateY(-50%) rotate(360deg)} }
         @keyframes bBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        /* identity row */
+        .hero-id { display:flex; align-items:flex-end; gap:24px; margin-top:-52px; position:relative; z-index:5; }
+        .hero-photo {
+          width:118px; height:118px; border-radius:50%; overflow:hidden; position:relative; flex-shrink:0;
+          border:5px solid var(--bg); box-shadow:0 0 0 1px var(--border), 0 8px 30px rgba(0,0,0,0.3);
+          transition:border-color 0.35s;
+        }
+        .hero-id-text { padding-bottom:6px; min-width:0; }
+        .hero-name {
+          font-family:var(--font-sans); font-weight:700; font-size:clamp(26px,3.6vw,46px);
+          letter-spacing:-0.02em; line-height:1; color:var(--text); margin-bottom:10px;
+        }
+        .hero-type { display:flex; align-items:center; gap:9px; font-size:13px; color:var(--text-muted); min-height:18px; }
+        .hero-caret { display:inline-block; width:2px; height:13px; background:var(--accent); margin-left:2px; vertical-align:middle; animation:bBlink 0.9s step-end infinite; }
+
+        /* lower grid */
+        .hero-grid { display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:48px; align-items:start; margin-top:36px; }
+        .hero-statement {
+          font-family:var(--font-sans); font-weight:700; font-size:clamp(28px,3.6vw,52px);
+          line-height:1.08; letter-spacing:-0.025em; color:var(--text); margin-bottom:22px;
+        }
+        .hero-serif { font-family:var(--font-serif); font-style:italic; font-weight:500; background:linear-gradient(110deg,var(--accent),var(--accent-3),var(--accent-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .hero-dim { color:var(--text-muted); }
+        .hero-bio { font-size:14px; color:var(--text-muted); line-height:1.8; max-width:540; margin-bottom:30px; }
+        .hero-ctas { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+        .hero-btn-solid { display:inline-flex; align-items:center; gap:8px; background:var(--text); color:var(--bg); font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:12px 26px; border-radius:40px; text-decoration:none; transition:opacity 0.2s; }
+        .hero-btn-ghost { display:inline-flex; align-items:center; font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); text-decoration:none; border:1px solid var(--border); padding:12px 26px; border-radius:40px; transition:color 0.2s,border-color 0.2s; }
+        .hero-icon { width:37px; height:37px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--text-muted); text-decoration:none; transition:color 0.2s,border-color 0.2s; flex-shrink:0; }
+
+        /* meta card */
+        .hero-meta { border:1px solid var(--border); border-radius:14px; padding:22px 22px 20px; background:var(--bg-card); }
+        .hero-meta-row { display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid var(--border-2); }
+        .hero-meta-k { font-size:10px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-faint); }
+        .hero-meta-v { font-size:12px; color:var(--text); font-weight:500; }
+        .hero-meta-stack { display:flex; flex-wrap:wrap; gap:6px; margin-top:16px; }
+        .hero-chip { font-size:10px; font-weight:600; letter-spacing:0.04em; padding:4px 10px; border-radius:20px; border:1px solid var(--border); color:var(--text-muted); }
+
+        @media (max-width:820px) {
+          .hero-grid { grid-template-columns:1fr; gap:32px; }
+          .hero-id { flex-direction:column; align-items:flex-start; gap:14px; }
+        }
       `}</style>
     </section>
   );
