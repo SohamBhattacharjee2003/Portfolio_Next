@@ -1,32 +1,13 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-const stats = [
-  { num: "4+",  label: "Projects Shipped"   },
-  { num: "SIH", label: "Hackathon Finalist"  },
-  { num: "7.0", label: "CGPA — B.Tech IT"   },
-  { num: "100+",label: "DSA Problems Solved" },
-];
-
-const education = [
-  {
-    degree: "B.Tech — Information Technology",
-    school: "Techno Main Saltlake, Kolkata",
-    year: "2022 – 2026",
-    score: "CGPA: 7.0 / 10",
-  },
-  {
-    degree: "Higher Secondary (Class XII)",
-    school: "DAV Public School Rupnarayanpur",
-    year: "2022",
-    score: "74%",
-  },
-  {
-    degree: "Secondary (Class X)",
-    school: "DAV Public School Rupnarayanpur",
-    year: "2020",
-    score: "77%",
-  },
+const highlights = [
+  "Full-Stack Web Development",
+  "Mobile Apps — Flutter & React Native",
+  "AI / LLM Integration",
+  "Real-Time Systems — WebSocket & WebRTC",
+  "Cloud Deployment — AWS EC2, Docker",
+  "REST API Design & Backend Architecture",
 ];
 
 export default function About() {
@@ -64,59 +45,36 @@ export default function About() {
               THAT MATTER.
             </h2>
             <p style={{ fontSize: 15, color: "#666", lineHeight: 1.8, marginBottom: 18, maxWidth: 440 }}>
-              I&apos;m Soham — a B.Tech IT student at Techno Main Saltlake, Kolkata. I build full-stack products at the intersection of web, mobile, and AI, from WebRTC-powered collaborative IDEs to OpenAI-driven platforms.
+              I&apos;m Soham — a full-stack developer who builds across web, mobile, and AI. From real-time collaborative tools to OpenAI-powered platforms, I care about shipping products that are fast, reliable, and well-crafted.
             </p>
-            <p style={{ fontSize: 15, color: "#666", lineHeight: 1.8, maxWidth: 440, marginBottom: 40 }}>
-              Finalist at Smart India Hackathon 2024 · Passionate about clean architecture, real-time systems, and shipping things that actually work in production.
+            <p style={{ fontSize: 15, color: "#666", lineHeight: 1.8, maxWidth: 440 }}>
+              Finalist at Smart India Hackathon 2024 · Passionate about clean architecture, real-time systems, and getting things into production.
             </p>
-
-            {/* Education timeline */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-              {education.map((ed, i) => (
-                <div key={i} style={{ display: "flex", gap: 20, paddingBottom: 24, position: "relative" }}>
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
-                    <div style={{ width: 8, height: 8, background: "#2563eb", borderRadius: "50%", marginTop: 4 }} />
-                    {i < education.length - 1 && <div style={{ width: 1, flex: 1, background: "#1a1a1a", marginTop: 6 }} />}
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: "#f2f2f2", marginBottom: 2 }}>{ed.degree}</div>
-                    <div style={{ fontSize: 12, color: "#555", marginBottom: 4 }}>{ed.school}</div>
-                    <div style={{ display: "flex", gap: 12 }}>
-                      <span style={{ fontSize: 10, color: "#333", letterSpacing: "0.1em" }}>{ed.year}</span>
-                      <span style={{ fontSize: 10, color: "#2563eb", letterSpacing: "0.05em" }}>{ed.score}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
-          {/* Right — stats */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
-            {stats.map(({ num, label }) => (
+          {/* Right — what I do */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+            {highlights.map((item, i) => (
               <div
-                key={label}
+                key={i}
                 style={{
-                  background: "#0e0e0e",
-                  padding: "36px 28px",
-                  borderBottom: "2px solid transparent",
-                  transition: "border-color 0.25s, background 0.25s",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 16,
+                  padding: "18px 0",
+                  borderBottom: "1px solid #111",
+                  transition: "padding-left 0.2s",
                   cursor: "default",
                 }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderBottomColor = "#2563eb";
-                  (e.currentTarget as HTMLDivElement).style.background = "#111";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderBottomColor = "transparent";
-                  (e.currentTarget as HTMLDivElement).style.background = "#0e0e0e";
-                }}
+                onMouseEnter={e => (e.currentTarget.style.paddingLeft = "10px")}
+                onMouseLeave={e => (e.currentTarget.style.paddingLeft = "0px")}
               >
-                <div style={{ fontSize: "clamp(28px, 3.5vw, 48px)", fontWeight: 800, color: "#f2f2f2", lineHeight: 1, marginBottom: 8 }}>{num}</div>
-                <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#444" }}>{label}</div>
+                <span style={{ width: 4, height: 4, background: "#2563eb", borderRadius: "50%", flexShrink: 0 }} />
+                <span style={{ fontSize: 14, color: "#555", letterSpacing: "0.01em" }}>{item}</span>
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>
