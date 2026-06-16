@@ -46,7 +46,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" ref={ref} className="reveal" style={{ padding: "120px 0 80px", background: "#050505" }}>
+    <section id="contact" ref={ref} className="reveal" style={{ padding: "72px 0 60px", background: "#050505" }}>
       <div className="container">
 
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>

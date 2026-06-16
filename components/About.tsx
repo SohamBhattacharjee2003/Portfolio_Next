@@ -25,10 +25,10 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" ref={ref} className="reveal" style={{ padding: "120px 0" }}>
+    <section id="about" ref={ref} className="reveal" style={{ padding: "72px 0" }}>
       <div className="container">
 
-        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 64 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 40 }}>
           <div style={{ width: 28, height: 2, background: "#2563eb" }} />
           <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: "#2563eb" }}>
             About

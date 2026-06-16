@@ -156,10 +156,10 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" ref={ref} className="reveal" style={{ padding: "120px 0", background: "#050505" }}>
+    <section id="projects" ref={ref} className="reveal" style={{ padding: "72px 0", background: "#050505" }}>
       <div className="container">
 
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 64 }}>
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 40 }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
               <div style={{ width: 28, height: 2, background: "#2563eb" }} />

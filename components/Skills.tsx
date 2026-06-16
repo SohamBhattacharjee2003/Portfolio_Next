@@ -85,8 +85,8 @@ export default function Skills() {
   }, []);
 
   return (
-    <section id="skills" ref={ref} className="reveal" style={{ padding: "120px 0" }}>
-      <div className="container" style={{ marginBottom: 56 }}>
+    <section id="skills" ref={ref} className="reveal" style={{ padding: "72px 0" }}>
+      <div className="container" style={{ marginBottom: 36 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
           <div style={{ width: 28, height: 2, background: "#2563eb" }} />
           <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: "#2563eb" }}>
