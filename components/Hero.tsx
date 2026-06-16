@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { SiGithub, SiLinkedin } from "react-icons/si";
+import { SiGithub } from "react-icons/si";
+import { FaLinkedinIn } from "react-icons/fa";
 
 const roles = ["Full-Stack Developer", "Mobile Engineer", "AI Builder", "Open Source Contributor"];
 
@@ -152,7 +153,7 @@ export default function Hero() {
             style={{ color: "#333", display: "flex", transition: "color 0.2s, transform 0.2s" }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#2563eb"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "#333"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}>
-            <SiLinkedin size={22} />
+            <FaLinkedinIn size={20} />
           </a>
         </div>
       </div>
