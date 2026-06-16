@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa";
@@ -38,7 +39,7 @@ export default function Hero() {
     <section
       id="hero"
       ref={containerRef}
-      style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", paddingTop: 100, paddingBottom: 80, background: "var(--bg)" }}
+      style={{ minHeight:"100vh", display:"flex", alignItems:"center", position:"relative", overflow:"hidden", paddingTop:100, paddingBottom:80, background:"var(--bg)" }}
     >
       {/* ── Orbs ── */}
       <div style={{ position:"absolute", top:"-10%", left:"-5%", width:520, height:520, borderRadius:"50%", filter:"blur(100px)", background:"radial-gradient(circle,var(--orb-blue) 0%,transparent 70%)", animation:"heroFloat 12s ease-in-out infinite", pointerEvents:"none" }} />
@@ -48,103 +49,153 @@ export default function Hero() {
       {/* ── Grid ── */}
       <div style={{ position:"absolute", inset:0, pointerEvents:"none", backgroundImage:"linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px)", backgroundSize:"72px 72px" }} />
 
-      {/* ── Decorative rotating rings ── */}
-      <div style={{ position:"absolute", top:120, right:60, width:160, height:160, border:"1px solid var(--border)", borderRadius:"50%", animation:"heroSpin 40s linear infinite", pointerEvents:"none" }} />
-      <div style={{ position:"absolute", top:148, right:88, width:104, height:104, border:"1px dashed var(--border)", borderRadius:"50%", animation:"heroSpin 26s linear infinite reverse", pointerEvents:"none" }} />
-      <div style={{ position:"absolute", top:176, right:116, width:48, height:48, background:"var(--accent)", borderRadius:"50%", opacity:0.12, animation:"heroPulse 4s ease infinite", pointerEvents:"none" }} />
-
       {/* ── Accent bar ── */}
       <div style={{ position:"absolute", left:0, top:"28%", width:3, height:"38%", background:"linear-gradient(to bottom,transparent,var(--accent),transparent)", pointerEvents:"none" }} />
 
-      {/* ── Floating SVG shapes (bottom-left) ── */}
-      <svg style={{ position:"absolute", bottom:80, left:40, opacity:0.06, animation:"heroDrift 8s ease-in-out infinite", pointerEvents:"none" }} width="120" height="120" viewBox="0 0 120 120" fill="none">
+      {/* ── Floating SVG shapes ── */}
+      <svg style={{ position:"absolute", bottom:80, left:40, opacity:0.06, animation:"heroDrift 8s ease-in-out infinite", pointerEvents:"none" }} width="100" height="100" viewBox="0 0 120 120" fill="none">
         <polygon points="60,5 115,95 5,95" stroke="var(--accent)" strokeWidth="1.5" fill="none"/>
         <polygon points="60,20 100,90 20,90" stroke="var(--accent-2)" strokeWidth="1" fill="none"/>
       </svg>
-      <svg style={{ position:"absolute", bottom:140, left:180, opacity:0.05, animation:"heroDrift 12s ease-in-out infinite 2s", pointerEvents:"none" }} width="60" height="60" viewBox="0 0 60 60" fill="none">
-        <rect x="8" y="8" width="44" height="44" stroke="var(--accent-3)" strokeWidth="1" fill="none" transform="rotate(22 30 30)"/>
-      </svg>
 
-      <div className="container" style={{ position:"relative", zIndex:1 }}>
+      <div className="container" style={{ position:"relative", zIndex:1, width:"100%" }}>
 
-        {/* Eyebrow */}
-        <div data-anim style={{ display:"flex", alignItems:"center", gap:12, marginBottom:36 }}>
-          <div style={{ width:8, height:8, background:"var(--accent-green)", borderRadius:"50%", boxShadow:"0 0 10px var(--accent-green)", animation:"heroPulse 2s ease infinite" }} />
-          <span style={{ fontSize:11, fontWeight:600, letterSpacing:"0.32em", textTransform:"uppercase", color:"var(--text-muted)" }}>
-            Available for Work · 2026
-          </span>
-        </div>
+        {/* Two-column layout */}
+        <div style={{ display:"grid", gridTemplateColumns:"1fr auto", gap:60, alignItems:"center" }}>
 
-        {/* Name */}
-        <div data-anim style={{ lineHeight:0.85, fontWeight:900, letterSpacing:"-0.03em", marginBottom:32 }}>
-          <div style={{ fontSize:"clamp(60px,11vw,152px)", color:"var(--text)" }}>SOHAM</div>
-          <div style={{ fontSize:"clamp(60px,11vw,152px)", background:"linear-gradient(110deg,#2563eb 0%,#06b6d4 50%,#7c3aed 100%)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
-            BHATTACHARJEE
-          </div>
-        </div>
-
-        {/* Typewriter */}
-        <div data-anim style={{ marginBottom:40, minHeight:28 }}>
-          <span style={{ fontSize:16, color:"var(--text-muted)", fontWeight:400, letterSpacing:"0.04em" }}>
-            {displayed}
-            <span style={{ borderRight:"2px solid var(--accent)", marginLeft:2, animation:"heroBlink 0.9s step-end infinite" }} />
-          </span>
-        </div>
-
-        {/* Description + tags */}
-        <div data-anim style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", flexWrap:"wrap", gap:24, marginBottom:48 }}>
-          <p style={{ fontSize:15, color:"var(--text-muted)", lineHeight:1.8, maxWidth:440 }}>
-            Building across web, mobile &amp; AI — WebRTC collaborative IDEs, OpenAI-powered chatbots, cross-platform Flutter apps. Hackathon finalist. Kolkata, India.
-          </p>
-          <div style={{ display:"flex", flexDirection:"column", alignItems:"flex-end", gap:8 }}>
-            {["Full Stack Dev", "Mobile / Flutter", "AI Integration"].map((t) => (
-              <span key={t} style={{
-                fontSize:10, fontWeight:600, letterSpacing:"0.12em", textTransform:"uppercase",
-                padding:"5px 12px",
-                border:"1px solid var(--border)",
-                background:"var(--bg-card)",
-                color:"var(--text-muted)",
-              }}>
-                {t}
+          {/* ── LEFT: text ── */}
+          <div>
+            {/* Eyebrow */}
+            <div data-anim style={{ display:"flex", alignItems:"center", gap:12, marginBottom:32 }}>
+              <div style={{ width:8, height:8, background:"var(--accent-green)", borderRadius:"50%", boxShadow:"0 0 10px var(--accent-green)", animation:"heroPulse 2s ease infinite" }} />
+              <span style={{ fontSize:11, fontWeight:600, letterSpacing:"0.32em", textTransform:"uppercase", color:"var(--text-muted)" }}>
+                Available for Work · 2026
               </span>
-            ))}
+            </div>
+
+            {/* Name */}
+            <div data-anim style={{ lineHeight:0.85, fontWeight:900, letterSpacing:"-0.03em", marginBottom:28 }}>
+              <div style={{ fontSize:"clamp(52px,8vw,120px)", color:"var(--text)" }}>SOHAM</div>
+              <div style={{ fontSize:"clamp(52px,8vw,120px)", background:"linear-gradient(110deg,#2563eb 0%,#06b6d4 50%,#7c3aed 100%)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+                BHATTACHARJEE
+              </div>
+            </div>
+
+            {/* Typewriter */}
+            <div data-anim style={{ marginBottom:32, minHeight:26 }}>
+              <span style={{ fontSize:15, color:"var(--text-muted)", fontWeight:400, letterSpacing:"0.04em" }}>
+                {displayed}
+                <span style={{ borderRight:"2px solid var(--accent)", marginLeft:2, animation:"heroBlink 0.9s step-end infinite" }} />
+              </span>
+            </div>
+
+            {/* Description */}
+            <div data-anim style={{ marginBottom:40 }}>
+              <p style={{ fontSize:15, color:"var(--text-muted)", lineHeight:1.8, maxWidth:480 }}>
+                Building across web, mobile &amp; AI — WebRTC collaborative IDEs, OpenAI-powered chatbots, cross-platform Flutter apps. Hackathon finalist. Kolkata, India.
+              </p>
+            </div>
+
+            {/* CTAs */}
+            <div data-anim style={{ display:"flex", alignItems:"center", gap:20, flexWrap:"wrap" }}>
+              <a
+                href="#projects"
+                style={{
+                  display:"inline-flex", alignItems:"center", gap:10,
+                  background:"linear-gradient(135deg,#2563eb,#7c3aed)",
+                  color:"#fff", fontSize:12, fontWeight:700, letterSpacing:"0.18em",
+                  textTransform:"uppercase", padding:"14px 28px", textDecoration:"none",
+                  transition:"opacity 0.2s,transform 0.2s", borderRadius:2,
+                  boxShadow:"0 0 32px rgba(37,99,235,0.25)",
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity="0.85"; (e.currentTarget as HTMLElement).style.transform="translateY(-2px)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity="1"; (e.currentTarget as HTMLElement).style.transform="translateY(0)"; }}
+              >
+                View Work →
+              </a>
+
+              <a href="#contact" className="arrow-link">Get in touch <span>→</span></a>
+
+              <div style={{ width:1, height:28, background:"var(--border)", margin:"0 4px" }} />
+
+              <a href="https://github.com/SohamBhattacharjee2003" target="_blank" rel="noreferrer"
+                style={{ color:"var(--text-faint)", display:"flex", transition:"color 0.2s,transform 0.2s" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color="var(--text)"; (e.currentTarget as HTMLElement).style.transform="translateY(-2px)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color="var(--text-faint)"; (e.currentTarget as HTMLElement).style.transform="translateY(0)"; }}>
+                <SiGithub size={22} />
+              </a>
+              <a href="https://linkedin.com/in/sohambhattacharjee84" target="_blank" rel="noreferrer"
+                style={{ color:"var(--text-faint)", display:"flex", transition:"color 0.2s,transform 0.2s" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color="#2563eb"; (e.currentTarget as HTMLElement).style.transform="translateY(-2px)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color="var(--text-faint)"; (e.currentTarget as HTMLElement).style.transform="translateY(0)"; }}>
+                <FaLinkedinIn size={20} />
+              </a>
+            </div>
           </div>
-        </div>
 
-        {/* CTAs */}
-        <div data-anim style={{ display:"flex", alignItems:"center", gap:20, flexWrap:"wrap" }}>
-          <a
-            href="#projects"
-            style={{
-              display:"inline-flex", alignItems:"center", gap:10,
+          {/* ── RIGHT: profile image ── */}
+          <div data-anim style={{ position:"relative", flexShrink:0, display:"flex", alignItems:"center", justifyContent:"center" }}>
+
+            {/* Outer spinning ring */}
+            <div style={{
+              position:"absolute",
+              width:340, height:340,
+              borderRadius:"50%",
+              border:"1px solid var(--border)",
+              animation:"heroSpin 30s linear infinite",
+            }} />
+            {/* Inner dashed ring */}
+            <div style={{
+              position:"absolute",
+              width:300, height:300,
+              borderRadius:"50%",
+              border:"1px dashed var(--accent)",
+              opacity:0.25,
+              animation:"heroSpin 20s linear infinite reverse",
+            }} />
+
+            {/* Accent arc glow */}
+            <div style={{
+              position:"absolute",
+              width:280, height:280,
+              borderRadius:"50%",
+              background:"conic-gradient(from 0deg, transparent 70%, rgba(37,99,235,0.35) 100%)",
+              animation:"heroSpin 6s linear infinite",
+            }} />
+
+            {/* Profile image */}
+            <div style={{
+              position:"relative",
+              width:256, height:256,
+              borderRadius:"50%",
+              overflow:"hidden",
+              border:"2px solid var(--border)",
+              boxShadow:"0 0 40px rgba(37,99,235,0.18), 0 0 80px rgba(124,58,237,0.1)",
+              zIndex:1,
+            }}>
+              <Image
+                src="/profile.png"
+                alt="Soham Bhattacharjee"
+                fill
+                style={{ objectFit:"cover", objectPosition:"center top" }}
+                priority
+              />
+            </div>
+
+            {/* Corner badge */}
+            <div style={{
+              position:"absolute", bottom:16, right:-8,
               background:"linear-gradient(135deg,#2563eb,#7c3aed)",
-              color:"#fff", fontSize:12, fontWeight:700, letterSpacing:"0.18em",
-              textTransform:"uppercase", padding:"15px 32px", textDecoration:"none",
-              transition:"opacity 0.2s,transform 0.2s", borderRadius:2,
-              boxShadow:"0 0 32px rgba(37,99,235,0.25)",
-            }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity="0.85"; (e.currentTarget as HTMLElement).style.transform="translateY(-2px)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity="1"; (e.currentTarget as HTMLElement).style.transform="translateY(0)"; }}
-          >
-            View Work →
-          </a>
+              borderRadius:8, padding:"6px 14px",
+              display:"flex", alignItems:"center", gap:6,
+              boxShadow:"0 4px 20px rgba(37,99,235,0.3)",
+              zIndex:2,
+            }}>
+              <div style={{ width:6, height:6, background:"#22c55e", borderRadius:"50%", boxShadow:"0 0 6px #22c55e" }} />
+              <span style={{ fontSize:10, fontWeight:700, color:"#fff", letterSpacing:"0.1em", textTransform:"uppercase" }}>Open to Work</span>
+            </div>
+          </div>
 
-          <a href="#contact" className="arrow-link">Get in touch <span>→</span></a>
-
-          <div style={{ width:1, height:28, background:"var(--border)", margin:"0 4px" }} />
-
-          <a href="https://github.com/SohamBhattacharjee2003" target="_blank" rel="noreferrer"
-            style={{ color:"var(--text-faint)", display:"flex", transition:"color 0.2s,transform 0.2s" }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color="var(--text)"; (e.currentTarget as HTMLElement).style.transform="translateY(-2px)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color="var(--text-faint)"; (e.currentTarget as HTMLElement).style.transform="translateY(0)"; }}>
-            <SiGithub size={22} />
-          </a>
-          <a href="https://linkedin.com/in/sohambhattacharjee84" target="_blank" rel="noreferrer"
-            style={{ color:"var(--text-faint)", display:"flex", transition:"color 0.2s,transform 0.2s" }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color="#2563eb"; (e.currentTarget as HTMLElement).style.transform="translateY(-2px)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color="var(--text-faint)"; (e.currentTarget as HTMLElement).style.transform="translateY(0)"; }}>
-            <FaLinkedinIn size={20} />
-          </a>
         </div>
       </div>
 
