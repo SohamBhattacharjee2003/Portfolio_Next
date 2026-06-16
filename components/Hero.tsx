@@ -5,7 +5,6 @@ import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa";
 
 const roles = ["Full-Stack Developer", "Mobile Engineer", "AI Builder", "Open Source Contributor"];
-const stack = ["TypeScript", "Next.js", "React", "Node", "Python", "AWS"];
 
 export default function Hero() {
   const [typed, setTyped]  = useState("");
@@ -133,14 +132,14 @@ export default function Hero() {
             </div>
             <div className="hero-meta-row">
               <span className="hero-meta-k">Status</span>
-              <span className="hero-meta-v" style={{ color:"var(--accent-green)" }}>Available for work</span>
+              <span className="hero-meta-v hero-meta-live">
+                <span className="hero-live-dot" />
+                Available for work
+              </span>
             </div>
-            <div className="hero-meta-row">
+            <div className="hero-meta-row" style={{ borderBottom:"none" }}>
               <span className="hero-meta-k">Focus</span>
               <span className="hero-meta-v">Web · Mobile · AI</span>
-            </div>
-            <div className="hero-meta-stack">
-              {stack.map(s => <span key={s} className="hero-chip">{s}</span>)}
             </div>
           </aside>
         </div>
@@ -180,12 +179,22 @@ export default function Hero() {
         .hero-icon { width:37px; height:37px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--text-muted); text-decoration:none; transition:color 0.2s,border-color 0.2s; flex-shrink:0; }
 
         /* meta card */
-        .hero-meta { border:1px solid var(--border); border-radius:14px; padding:22px 22px 20px; background:var(--bg-card); }
-        .hero-meta-row { display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid var(--border-2); }
-        .hero-meta-k { font-size:10px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-faint); }
-        .hero-meta-v { font-size:12px; color:var(--text); font-weight:500; }
-        .hero-meta-stack { display:flex; flex-wrap:wrap; gap:6px; margin-top:16px; }
-        .hero-chip { font-size:10px; font-weight:600; letter-spacing:0.04em; padding:4px 10px; border-radius:20px; border:1px solid var(--border); color:var(--text-muted); }
+        .hero-meta {
+          position:relative; border:1px solid var(--border); border-radius:16px;
+          padding:6px 22px; overflow:hidden;
+          background:linear-gradient(160deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
+          box-shadow:0 1px 0 rgba(255,255,255,0.03) inset, 0 10px 30px rgba(0,0,0,0.12);
+        }
+        .hero-meta::before {
+          content:""; position:absolute; top:0; left:0; right:0; height:3px;
+          background:linear-gradient(90deg,var(--accent),var(--accent-3),var(--accent-2));
+          opacity:0.85;
+        }
+        .hero-meta-row { display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid var(--border-2); gap:12px; }
+        .hero-meta-k { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); }
+        .hero-meta-v { font-size:13px; color:var(--text); font-weight:600; text-align:right; }
+        .hero-meta-live { display:inline-flex; align-items:center; gap:7px; color:var(--accent-green); }
+        .hero-live-dot { width:7px; height:7px; border-radius:50%; background:var(--accent-green); box-shadow:0 0 8px var(--accent-green); animation:bBlink 1.6s ease-in-out infinite; }
 
         @media (max-width:820px) {
           .hero-grid { grid-template-columns:1fr; gap:32px; }

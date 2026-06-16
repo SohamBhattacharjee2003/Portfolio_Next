@@ -123,6 +123,14 @@ export default function Navbar() {
         {/* Right controls */}
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
 
+          {/* Inline nav links — laptop & tablet only */}
+          <div className="nav-links">
+            {NAV.map((n) => (
+              <a key={n} href={`#${n.toLowerCase()}`} className="nav-link">{n}</a>
+            ))}
+            <span className="nav-sep" />
+          </div>
+
           {/* Theme */}
           <button onClick={toggleTheme} title={dark ? "Light mode" : "Dark mode"} style={circle}
             onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
@@ -135,13 +143,30 @@ export default function Navbar() {
             <SiGithub size={15} />
           </a>
 
-          {/* Menu */}
-          <button onClick={() => setMenuOpen(o => !o)} style={circle}
+          {/* Menu — mobile only */}
+          <button className="nav-burger" onClick={() => setMenuOpen(o => !o)} style={circle}
             onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
             <MenuIcon open={menuOpen} />
           </button>
         </div>
       </div>
+
+      <style>{`
+        .nav-links { display: flex; align-items: center; gap: 26px; margin-right: 10px; }
+        .nav-link {
+          font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+          color: var(--text-muted); text-decoration: none; transition: color 0.2s;
+        }
+        .nav-link:hover { color: var(--text); }
+        .nav-sep { width: 1px; height: 20px; background: var(--border); }
+        .nav-burger { display: none !important; }
+
+        /* Mobile: hide inline links, show hamburger */
+        @media (max-width: 720px) {
+          .nav-links { display: none; }
+          .nav-burger { display: flex !important; }
+        }
+      `}</style>
 
       {/* Dropdown */}
       <div style={{
