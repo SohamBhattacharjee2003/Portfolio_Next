@@ -1,13 +1,14 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { SiGithub, SiLinkedin } from "react-icons/si";
+import { SiGithub } from "react-icons/si";
+import { FaLinkedinIn } from "react-icons/fa";
 import { HiMail, HiPhone } from "react-icons/hi";
 
 const links = [
-  { label: "Email",    value: "sohambhattacharjee84@gmail.com",      href: "mailto:sohambhattacharjee84@gmail.com", Icon: HiMail,      color: "#2563eb" },
+  { label: "Email",    value: "sohambhattacharjee84@gmail.com",      href: "mailto:sohambhattacharjee84@gmail.com", Icon: HiMail,        color: "#2563eb" },
   { label: "GitHub",   value: "github.com/SohamBhattacharjee2003",   href: "https://github.com/SohamBhattacharjee2003", Icon: SiGithub,   color: "#f2f2f2" },
-  { label: "LinkedIn", value: "linkedin.com/in/sohambhattacharjee84", href: "https://linkedin.com/in/sohambhattacharjee84", Icon: SiLinkedin, color: "#0a66c2" },
-  { label: "Phone",    value: "+91 98323 05604",                      href: "tel:+919832305604", Icon: HiPhone,     color: "#22c55e" },
+  { label: "LinkedIn", value: "linkedin.com/in/sohambhattacharjee84", href: "https://linkedin.com/in/sohambhattacharjee84", Icon: FaLinkedinIn, color: "#0a66c2" },
+  { label: "Phone",    value: "+91 98323 05604",                      href: "tel:+919832305604", Icon: HiPhone,       color: "#22c55e" },
 ];
 
 export default function Contact() {
