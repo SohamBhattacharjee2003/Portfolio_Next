@@ -6,25 +6,18 @@ import { FaLinkedinIn } from "react-icons/fa";
 const roles = ["Full-Stack Developer", "Mobile Engineer", "AI Builder", "Open Source Contributor"];
 
 export default function Hero() {
-  const [roleIdx, setRoleIdx]       = useState(0);
-  const [displayed, setDisplayed]   = useState("");
-  const [deleting, setDeleting]     = useState(false);
-  const containerRef                = useRef<HTMLElement>(null);
+  const [roleIdx, setRoleIdx]     = useState(0);
+  const [displayed, setDisplayed] = useState("");
+  const [deleting, setDeleting]   = useState(false);
+  const containerRef              = useRef<HTMLElement>(null);
 
   /* typewriter */
   useEffect(() => {
     const word  = roles[roleIdx];
     const speed = deleting ? 45 : 90;
     const t = setTimeout(() => {
-      if (!deleting && displayed === word) {
-        setTimeout(() => setDeleting(true), 2000);
-        return;
-      }
-      if (deleting && displayed === "") {
-        setDeleting(false);
-        setRoleIdx(i => (i + 1) % roles.length);
-        return;
-      }
+      if (!deleting && displayed === word) { setTimeout(() => setDeleting(true), 2000); return; }
+      if (deleting && displayed === "")   { setDeleting(false); setRoleIdx(i => (i + 1) % roles.length); return; }
       setDisplayed(deleting ? word.slice(0, displayed.length - 1) : word.slice(0, displayed.length + 1));
     }, speed);
     return () => clearTimeout(t);
@@ -45,73 +38,72 @@ export default function Hero() {
     <section
       id="hero"
       ref={containerRef}
-      style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", paddingTop: 100, paddingBottom: 80 }}
+      style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", paddingTop: 100, paddingBottom: 80, background: "var(--bg)" }}
     >
-      {/* ── Animated orbs ── */}
-      <div className="orb orb-blue"  style={{ top: "-10%",  left: "-5%"  }} />
-      <div className="orb orb-purple" style={{ bottom: "-15%", right: "-8%" }} />
-      <div className="orb orb-cyan"  style={{ top: "50%",   right: "20%" }} />
+      {/* ── Orbs ── */}
+      <div style={{ position:"absolute", top:"-10%", left:"-5%", width:520, height:520, borderRadius:"50%", filter:"blur(100px)", background:"radial-gradient(circle,var(--orb-blue) 0%,transparent 70%)", animation:"heroFloat 12s ease-in-out infinite", pointerEvents:"none" }} />
+      <div style={{ position:"absolute", bottom:"-15%", right:"-8%", width:440, height:440, borderRadius:"50%", filter:"blur(100px)", background:"radial-gradient(circle,var(--orb-purple) 0%,transparent 70%)", animation:"heroFloat 18s ease-in-out infinite reverse", pointerEvents:"none" }} />
+      <div style={{ position:"absolute", top:"50%", right:"22%", width:280, height:280, borderRadius:"50%", filter:"blur(80px)", background:"radial-gradient(circle,var(--orb-cyan) 0%,transparent 70%)", animation:"heroFloat 22s ease-in-out infinite 3s", pointerEvents:"none" }} />
 
-      {/* ── Grid overlay ── */}
-      <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)",
-        backgroundSize: "72px 72px",
-      }} />
+      {/* ── Grid ── */}
+      <div style={{ position:"absolute", inset:0, pointerEvents:"none", backgroundImage:"linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px)", backgroundSize:"72px 72px" }} />
 
-      {/* ── Vignette ── */}
-      <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        background: "radial-gradient(ellipse at center, transparent 40%, #080808 100%)",
-      }} />
+      {/* ── Decorative rotating rings ── */}
+      <div style={{ position:"absolute", top:120, right:60, width:160, height:160, border:"1px solid var(--border)", borderRadius:"50%", animation:"heroSpin 40s linear infinite", pointerEvents:"none" }} />
+      <div style={{ position:"absolute", top:148, right:88, width:104, height:104, border:"1px dashed var(--border)", borderRadius:"50%", animation:"heroSpin 26s linear infinite reverse", pointerEvents:"none" }} />
+      <div style={{ position:"absolute", top:176, right:116, width:48, height:48, background:"var(--accent)", borderRadius:"50%", opacity:0.12, animation:"heroPulse 4s ease infinite", pointerEvents:"none" }} />
 
-      <div className="container" style={{ position: "relative", zIndex: 1 }}>
+      {/* ── Accent bar ── */}
+      <div style={{ position:"absolute", left:0, top:"28%", width:3, height:"38%", background:"linear-gradient(to bottom,transparent,var(--accent),transparent)", pointerEvents:"none" }} />
+
+      {/* ── Floating SVG shapes (bottom-left) ── */}
+      <svg style={{ position:"absolute", bottom:80, left:40, opacity:0.06, animation:"heroDrift 8s ease-in-out infinite", pointerEvents:"none" }} width="120" height="120" viewBox="0 0 120 120" fill="none">
+        <polygon points="60,5 115,95 5,95" stroke="var(--accent)" strokeWidth="1.5" fill="none"/>
+        <polygon points="60,20 100,90 20,90" stroke="var(--accent-2)" strokeWidth="1" fill="none"/>
+      </svg>
+      <svg style={{ position:"absolute", bottom:140, left:180, opacity:0.05, animation:"heroDrift 12s ease-in-out infinite 2s", pointerEvents:"none" }} width="60" height="60" viewBox="0 0 60 60" fill="none">
+        <rect x="8" y="8" width="44" height="44" stroke="var(--accent-3)" strokeWidth="1" fill="none" transform="rotate(22 30 30)"/>
+      </svg>
+
+      <div className="container" style={{ position:"relative", zIndex:1 }}>
 
         {/* Eyebrow */}
-        <div data-anim style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 36 }}>
-          <div style={{ width: 6, height: 6, background: "#22c55e", borderRadius: "50%", boxShadow: "0 0 8px #22c55e", animation: "pulse-dot 2s ease infinite" }} />
-          <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.32em", textTransform: "uppercase", color: "#555" }}>
+        <div data-anim style={{ display:"flex", alignItems:"center", gap:12, marginBottom:36 }}>
+          <div style={{ width:8, height:8, background:"var(--accent-green)", borderRadius:"50%", boxShadow:"0 0 10px var(--accent-green)", animation:"heroPulse 2s ease infinite" }} />
+          <span style={{ fontSize:11, fontWeight:600, letterSpacing:"0.32em", textTransform:"uppercase", color:"var(--text-muted)" }}>
             Available for Work · 2026
           </span>
         </div>
 
         {/* Name */}
-        <div data-anim style={{ lineHeight: 0.85, fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 32 }}>
-          <div style={{ fontSize: "clamp(60px, 11vw, 152px)", color: "#f2f2f2" }}>
-            SOHAM
-          </div>
-          <div style={{
-            fontSize: "clamp(60px, 11vw, 152px)",
-            background: "linear-gradient(110deg, #2563eb 0%, #06b6d4 50%, #7c3aed 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}>
+        <div data-anim style={{ lineHeight:0.85, fontWeight:900, letterSpacing:"-0.03em", marginBottom:32 }}>
+          <div style={{ fontSize:"clamp(60px,11vw,152px)", color:"var(--text)" }}>SOHAM</div>
+          <div style={{ fontSize:"clamp(60px,11vw,152px)", background:"linear-gradient(110deg,#2563eb 0%,#06b6d4 50%,#7c3aed 100%)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
             BHATTACHARJEE
           </div>
         </div>
 
-        {/* Typewriter role */}
-        <div data-anim style={{ marginBottom: 40, minHeight: 28 }}>
-          <span style={{ fontSize: 16, color: "#888", fontWeight: 400, letterSpacing: "0.04em" }}>
+        {/* Typewriter */}
+        <div data-anim style={{ marginBottom:40, minHeight:28 }}>
+          <span style={{ fontSize:16, color:"var(--text-muted)", fontWeight:400, letterSpacing:"0.04em" }}>
             {displayed}
-            <span style={{ borderRight: "2px solid #2563eb", marginLeft: 2, animation: "blink 0.9s step-end infinite" }} />
+            <span style={{ borderRight:"2px solid var(--accent)", marginLeft:2, animation:"heroBlink 0.9s step-end infinite" }} />
           </span>
         </div>
 
         {/* Description + tags */}
-        <div data-anim style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", flexWrap: "wrap", gap: 24, marginBottom: 48 }}>
-          <p style={{ fontSize: 15, color: "#555", lineHeight: 1.8, maxWidth: 440 }}>
+        <div data-anim style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", flexWrap:"wrap", gap:24, marginBottom:48 }}>
+          <p style={{ fontSize:15, color:"var(--text-muted)", lineHeight:1.8, maxWidth:440 }}>
             Building across web, mobile &amp; AI — WebRTC collaborative IDEs, OpenAI-powered chatbots, cross-platform Flutter apps. Hackathon finalist. Kolkata, India.
           </p>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8 }}>
+          <div style={{ display:"flex", flexDirection:"column", alignItems:"flex-end", gap:8 }}>
             {["Full Stack Dev", "Mobile / Flutter", "AI Integration"].map((t) => (
               <span key={t} style={{
-                fontSize: 10, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase",
-                padding: "5px 12px",
-                border: "1px solid transparent",
-                background: "linear-gradient(#080808,#080808) padding-box, linear-gradient(90deg,#2563eb,#7c3aed) border-box",
-                color: "#888",
+                fontSize:10, fontWeight:600, letterSpacing:"0.12em", textTransform:"uppercase",
+                padding:"5px 12px",
+                border:"1px solid var(--border)",
+                background:"var(--bg-card)",
+                color:"var(--text-muted)",
               }}>
                 {t}
               </span>
@@ -120,59 +112,55 @@ export default function Hero() {
         </div>
 
         {/* CTAs */}
-        <div data-anim style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
+        <div data-anim style={{ display:"flex", alignItems:"center", gap:20, flexWrap:"wrap" }}>
           <a
             href="#projects"
             style={{
-              display: "inline-flex", alignItems: "center", gap: 10,
-              background: "linear-gradient(135deg, #2563eb, #7c3aed)",
-              color: "#fff", fontSize: 12, fontWeight: 700, letterSpacing: "0.18em",
-              textTransform: "uppercase", padding: "15px 32px", textDecoration: "none",
-              transition: "opacity 0.2s, transform 0.2s", borderRadius: 2,
-              boxShadow: "0 0 32px rgba(37,99,235,0.25)",
+              display:"inline-flex", alignItems:"center", gap:10,
+              background:"linear-gradient(135deg,#2563eb,#7c3aed)",
+              color:"#fff", fontSize:12, fontWeight:700, letterSpacing:"0.18em",
+              textTransform:"uppercase", padding:"15px 32px", textDecoration:"none",
+              transition:"opacity 0.2s,transform 0.2s", borderRadius:2,
+              boxShadow:"0 0 32px rgba(37,99,235,0.25)",
             }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "0.85"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity="0.85"; (e.currentTarget as HTMLElement).style.transform="translateY(-2px)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity="1"; (e.currentTarget as HTMLElement).style.transform="translateY(0)"; }}
           >
             View Work →
           </a>
 
-          <a href="#contact" className="arrow-link">
-            Get in touch <span>→</span>
-          </a>
+          <a href="#contact" className="arrow-link">Get in touch <span>→</span></a>
 
-          <div style={{ width: 1, height: 28, background: "#1e1e1e", margin: "0 4px" }} />
+          <div style={{ width:1, height:28, background:"var(--border)", margin:"0 4px" }} />
 
           <a href="https://github.com/SohamBhattacharjee2003" target="_blank" rel="noreferrer"
-            style={{ color: "#333", display: "flex", transition: "color 0.2s, transform 0.2s" }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#f2f2f2"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "#333"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}>
+            style={{ color:"var(--text-faint)", display:"flex", transition:"color 0.2s,transform 0.2s" }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color="var(--text)"; (e.currentTarget as HTMLElement).style.transform="translateY(-2px)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color="var(--text-faint)"; (e.currentTarget as HTMLElement).style.transform="translateY(0)"; }}>
             <SiGithub size={22} />
           </a>
           <a href="https://linkedin.com/in/sohambhattacharjee84" target="_blank" rel="noreferrer"
-            style={{ color: "#333", display: "flex", transition: "color 0.2s, transform 0.2s" }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#2563eb"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "#333"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}>
+            style={{ color:"var(--text-faint)", display:"flex", transition:"color 0.2s,transform 0.2s" }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color="#2563eb"; (e.currentTarget as HTMLElement).style.transform="translateY(-2px)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color="var(--text-faint)"; (e.currentTarget as HTMLElement).style.transform="translateY(0)"; }}>
             <FaLinkedinIn size={20} />
           </a>
         </div>
       </div>
 
       {/* Scroll hint */}
-      <div style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, opacity: 0.25 }}>
-        <span style={{ fontSize: 9, letterSpacing: "0.3em", textTransform: "uppercase", color: "#666" }}>Scroll</span>
-        <div style={{ width: 1, height: 36, background: "linear-gradient(to bottom, #2563eb, transparent)", animation: "scroll-line 2s ease infinite" }} />
+      <div style={{ position:"absolute", bottom:32, left:"50%", transform:"translateX(-50%)", display:"flex", flexDirection:"column", alignItems:"center", gap:8, opacity:0.3 }}>
+        <span style={{ fontSize:9, letterSpacing:"0.3em", textTransform:"uppercase", color:"var(--text-muted)" }}>Scroll</span>
+        <div style={{ width:1, height:36, background:"linear-gradient(to bottom,var(--accent),transparent)", animation:"heroScrollLine 2s ease infinite" }} />
       </div>
 
       <style>{`
-        .orb { position:absolute; border-radius:50%; filter:blur(100px); pointer-events:none; animation:float 12s ease-in-out infinite; }
-        .orb-blue   { width:520px; height:520px; background:radial-gradient(circle,rgba(37,99,235,0.18) 0%,transparent 70%); animation-delay:0s; }
-        .orb-purple { width:440px; height:440px; background:radial-gradient(circle,rgba(124,58,237,0.15) 0%,transparent 70%); animation-delay:-4s; }
-        .orb-cyan   { width:280px; height:280px; background:radial-gradient(circle,rgba(6,182,212,0.12) 0%,transparent 70%); animation-delay:-8s; }
-        @keyframes float { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-40px) scale(1.05);} }
-        @keyframes pulse-dot { 0%,100%{opacity:1;box-shadow:0 0 8px #22c55e;} 50%{opacity:0.6;box-shadow:0 0 16px #22c55e;} }
-        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
-        @keyframes scroll-line { 0%{opacity:0;transform:scaleY(0);transform-origin:top;} 50%{opacity:1;transform:scaleY(1);} 100%{opacity:0;transform:scaleY(1);transform-origin:bottom;} }
+        @keyframes heroFloat      { 0%,100%{transform:translateY(0) scale(1);}    50%{transform:translateY(-40px) scale(1.05);} }
+        @keyframes heroSpin       { to { transform: rotate(360deg); } }
+        @keyframes heroPulse      { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+        @keyframes heroBlink      { 0%,100%{opacity:1;} 50%{opacity:0;} }
+        @keyframes heroDrift      { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-16px) rotate(10deg);} }
+        @keyframes heroScrollLine { 0%{opacity:0;transform:scaleY(0);transform-origin:top;} 50%{opacity:1;transform:scaleY(1);} 100%{opacity:0;transform:scaleY(1);transform-origin:bottom;} }
       `}</style>
     </section>
   );
