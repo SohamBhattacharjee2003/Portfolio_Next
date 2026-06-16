@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-const stats = [
-  { num: "3+",  label: "Years Experience" },
-  { num: "20+", label: "Projects Shipped"  },
-  { num: "10+", label: "Happy Clients"     },
-  { num: "∞",   label: "Lines of Code"     },
+const highlights = [
+  "Full-Stack Web Development",
+  "Mobile Apps — Flutter & React Native",
+  "AI / LLM Integration",
+  "Real-Time Systems — WebSocket & WebRTC",
+  "Cloud Deployment — AWS EC2, Docker",
+  "REST API Design & Backend Architecture",
 ];
 
 export default function About() {
@@ -14,31 +16,28 @@ export default function About() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    el.classList.add("reveal");
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { el.classList.add("in"); obs.disconnect(); } },
-      { threshold: 0.12 }
+      { threshold: 0.08 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
   return (
-    <section id="about" ref={ref} className="reveal" style={{ padding: "120px 0" }}>
+    <section id="about" ref={ref} className="reveal" style={{ padding: "72px 0" }}>
       <div className="container">
 
-        {/* Label */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 64 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 40 }}>
           <div style={{ width: 28, height: 2, background: "#2563eb" }} />
           <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: "#2563eb" }}>
             About
           </span>
         </div>
 
-        {/* Two column */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
 
-          {/* Left */}
+          {/* Left — bio */}
           <div>
             <h2 style={{ fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 800, lineHeight: 0.92, letterSpacing: "-0.02em", color: "#f2f2f2", marginBottom: 32 }}>
               I BUILD<br />
@@ -46,39 +45,36 @@ export default function About() {
               THAT MATTER.
             </h2>
             <p style={{ fontSize: 15, color: "#666", lineHeight: 1.8, marginBottom: 18, maxWidth: 440 }}>
-              I&apos;m Soham — a full-stack software engineer who thrives at the intersection of engineering and design. I obsess over code quality, performance, and the kind of UI that makes people stop and look twice.
+              I&apos;m Soham — a full-stack developer who builds across web, mobile, and AI. From real-time collaborative tools to OpenAI-powered platforms, I care about shipping products that are fast, reliable, and well-crafted.
             </p>
             <p style={{ fontSize: 15, color: "#666", lineHeight: 1.8, maxWidth: 440 }}>
-              From architecting backend systems to shipping pixel-precise frontends and AI-powered products — I bring ideas to life fast, and I bring them to life well.
+              Finalist at Smart India Hackathon 2024 · Passionate about clean architecture, real-time systems, and getting things into production.
             </p>
           </div>
 
-          {/* Right: stats */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
-            {stats.map(({ num, label }) => (
+          {/* Right — what I do */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+            {highlights.map((item, i) => (
               <div
-                key={label}
+                key={i}
                 style={{
-                  background: "#0e0e0e",
-                  padding: "36px 28px",
-                  borderBottom: "2px solid transparent",
-                  transition: "border-color 0.25s, background 0.25s",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 16,
+                  padding: "18px 0",
+                  borderBottom: "1px solid #111",
+                  transition: "padding-left 0.2s",
                   cursor: "default",
                 }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderBottomColor = "#2563eb";
-                  (e.currentTarget as HTMLDivElement).style.background = "#111";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderBottomColor = "transparent";
-                  (e.currentTarget as HTMLDivElement).style.background = "#0e0e0e";
-                }}
+                onMouseEnter={e => (e.currentTarget.style.paddingLeft = "10px")}
+                onMouseLeave={e => (e.currentTarget.style.paddingLeft = "0px")}
               >
-                <div style={{ fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 800, color: "#f2f2f2", lineHeight: 1, marginBottom: 8 }}>{num}</div>
-                <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#444" }}>{label}</div>
+                <span style={{ width: 4, height: 4, background: "#2563eb", borderRadius: "50%", flexShrink: 0 }} />
+                <span style={{ fontSize: 14, color: "#555", letterSpacing: "0.01em" }}>{item}</span>
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>
