@@ -1,203 +1,177 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SiGithub, SiLinkedin } from "react-icons/si";
 
-export default function Hero() {
-  const headRef = useRef<HTMLDivElement>(null);
-  const subRef  = useRef<HTMLDivElement>(null);
-  const ctaRef  = useRef<HTMLDivElement>(null);
+const roles = ["Full-Stack Developer", "Mobile Engineer", "AI Builder", "Open Source Contributor"];
 
+export default function Hero() {
+  const [roleIdx, setRoleIdx]       = useState(0);
+  const [displayed, setDisplayed]   = useState("");
+  const [deleting, setDeleting]     = useState(false);
+  const containerRef                = useRef<HTMLElement>(null);
+
+  /* typewriter */
   useEffect(() => {
-    [headRef, subRef, ctaRef].forEach((r, i) => {
-      const el = r.current;
-      if (!el) return;
+    const word  = roles[roleIdx];
+    const speed = deleting ? 45 : 90;
+    const t = setTimeout(() => {
+      if (!deleting && displayed === word) {
+        setTimeout(() => setDeleting(true), 2000);
+        return;
+      }
+      if (deleting && displayed === "") {
+        setDeleting(false);
+        setRoleIdx(i => (i + 1) % roles.length);
+        return;
+      }
+      setDisplayed(deleting ? word.slice(0, displayed.length - 1) : word.slice(0, displayed.length + 1));
+    }, speed);
+    return () => clearTimeout(t);
+  }, [displayed, deleting, roleIdx]);
+
+  /* staggered entrance */
+  useEffect(() => {
+    const els = containerRef.current?.querySelectorAll<HTMLElement>("[data-anim]");
+    els?.forEach((el, i) => {
       el.style.opacity = "0";
-      el.style.transform = "translateY(36px)";
-      el.style.transition = `opacity 0.9s ease ${i * 0.18}s, transform 0.9s ease ${i * 0.18}s`;
-      setTimeout(() => { el.style.opacity = "1"; el.style.transform = "translateY(0)"; }, 60);
+      el.style.transform = "translateY(28px)";
+      el.style.transition = `opacity 0.85s ease ${i * 0.13}s, transform 0.85s ease ${i * 0.13}s`;
+      setTimeout(() => { el.style.opacity = "1"; el.style.transform = "translateY(0)"; }, 80);
     });
   }, []);
 
   return (
     <section
       id="hero"
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        position: "relative",
-        overflow: "hidden",
-        paddingTop: 100,
-        paddingBottom: 80,
-      }}
+      ref={containerRef}
+      style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", paddingTop: 100, paddingBottom: 80 }}
     >
-      {/* Grid bg */}
+      {/* ── Animated orbs ── */}
+      <div className="orb orb-blue"  style={{ top: "-10%",  left: "-5%"  }} />
+      <div className="orb orb-purple" style={{ bottom: "-15%", right: "-8%" }} />
+      <div className="orb orb-cyan"  style={{ top: "50%",   right: "20%" }} />
+
+      {/* ── Grid overlay ── */}
       <div style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage:
-          "linear-gradient(rgba(37,99,235,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.03) 1px, transparent 1px)",
-        backgroundSize: "80px 80px",
+        backgroundImage: "linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)",
+        backgroundSize: "72px 72px",
       }} />
 
-      {/* Blue glow top-right */}
+      {/* ── Vignette ── */}
       <div style={{
-        position: "absolute", top: -120, right: -120,
-        width: 480, height: 480,
-        background: "radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%)",
-        pointerEvents: "none",
+        position: "absolute", inset: 0, pointerEvents: "none",
+        background: "radial-gradient(ellipse at center, transparent 40%, #080808 100%)",
       }} />
 
-      {/* Rotating border square */}
-      <div style={{
-        position: "absolute", top: 110, right: 52,
-        width: 180, height: 180,
-        border: "1px solid rgba(37,99,235,0.12)",
-        animation: "spin 40s linear infinite",
-        pointerEvents: "none",
-      }} />
-      <div style={{
-        position: "absolute", top: 155, right: 97,
-        width: 90, height: 90,
-        background: "rgba(37,99,235,0.05)",
-        pointerEvents: "none",
-      }} />
-
-      {/* Left accent */}
-      <div style={{
-        position: "absolute", left: 0, top: "28%",
-        width: 3, height: "38%",
-        background: "linear-gradient(to bottom, transparent, #2563eb, transparent)",
-      }} />
-
-      <div className="container">
+      <div className="container" style={{ position: "relative", zIndex: 1 }}>
 
         {/* Eyebrow */}
-        <div ref={headRef}>
-          <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 40 }}>
-            <div style={{ width: 32, height: 2, background: "#2563eb" }} />
-            <span style={{
-              fontSize: 11, fontWeight: 600, letterSpacing: "0.32em",
-              textTransform: "uppercase", color: "#2563eb",
-            }}>
-              Available for Work · 2026
-            </span>
-          </div>
+        <div data-anim style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 36 }}>
+          <div style={{ width: 6, height: 6, background: "#22c55e", borderRadius: "50%", boxShadow: "0 0 8px #22c55e", animation: "pulse-dot 2s ease infinite" }} />
+          <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.32em", textTransform: "uppercase", color: "#555" }}>
+            Available for Work · 2026
+          </span>
+        </div>
 
-          {/* Name — two lines */}
-          <div style={{ lineHeight: 0.86, fontWeight: 800, letterSpacing: "-0.025em" }}>
-            <div style={{ fontSize: "clamp(64px, 11vw, 148px)", color: "#f2f2f2" }}>
-              SOHAM
-            </div>
-            <div style={{
-              fontSize: "clamp(64px, 11vw, 148px)",
-              color: "transparent",
-              WebkitTextStroke: "2px #2563eb",
-              /* fallback for browsers that don't support stroke well */
-              background: "linear-gradient(90deg, #2563eb, #60a5fa)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}>
-              BHATTACHARJEE
-            </div>
+        {/* Name */}
+        <div data-anim style={{ lineHeight: 0.85, fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 32 }}>
+          <div style={{ fontSize: "clamp(60px, 11vw, 152px)", color: "#f2f2f2" }}>
+            SOHAM
+          </div>
+          <div style={{
+            fontSize: "clamp(60px, 11vw, 152px)",
+            background: "linear-gradient(110deg, #2563eb 0%, #06b6d4 50%, #7c3aed 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}>
+            BHATTACHARJEE
           </div>
         </div>
 
-        {/* Sub row */}
-        <div
-          ref={subRef}
-          style={{
-            marginTop: 44,
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: 24,
-          }}
-        >
-          <div style={{ maxWidth: 460 }}>
-            <p style={{ fontSize: 15, color: "#666", lineHeight: 1.75, marginBottom: 20 }}>
-              Full-stack developer building across web, mobile &amp; AI.
-              Real-time systems · WebRTC · OpenAI · Docker · AWS.
-            </p>
-            {/* Location pill */}
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-              <span style={{
-                width: 6, height: 6, background: "#22c55e",
-                borderRadius: "50%", boxShadow: "0 0 6px #22c55e",
-                animation: "pulse 2s ease infinite",
-              }} />
-              <span style={{ fontSize: 12, color: "#444", letterSpacing: "0.06em" }}>
-                Kolkata, West Bengal
-              </span>
-            </div>
-          </div>
+        {/* Typewriter role */}
+        <div data-anim style={{ marginBottom: 40, minHeight: 28 }}>
+          <span style={{ fontSize: 16, color: "#888", fontWeight: 400, letterSpacing: "0.04em" }}>
+            {displayed}
+            <span style={{ borderRight: "2px solid #2563eb", marginLeft: 2, animation: "blink 0.9s step-end infinite" }} />
+          </span>
+        </div>
 
-          {/* Role tags */}
+        {/* Description + tags */}
+        <div data-anim style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", flexWrap: "wrap", gap: 24, marginBottom: 48 }}>
+          <p style={{ fontSize: 15, color: "#555", lineHeight: 1.8, maxWidth: 440 }}>
+            Building across web, mobile &amp; AI — WebRTC collaborative IDEs, OpenAI-powered chatbots, cross-platform Flutter apps. Hackathon finalist. Kolkata, India.
+          </p>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8 }}>
             {["Full Stack Dev", "Mobile / Flutter", "AI Integration"].map((t) => (
-              <span key={t} className="tag">{t}</span>
+              <span key={t} style={{
+                fontSize: 10, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase",
+                padding: "5px 12px",
+                border: "1px solid transparent",
+                background: "linear-gradient(#080808,#080808) padding-box, linear-gradient(90deg,#2563eb,#7c3aed) border-box",
+                color: "#888",
+              }}>
+                {t}
+              </span>
             ))}
           </div>
         </div>
 
-        {/* CTAs + socials */}
-        <div ref={ctaRef} style={{ marginTop: 52, display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
+        {/* CTAs */}
+        <div data-anim style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
           <a
             href="#projects"
             style={{
               display: "inline-flex", alignItems: "center", gap: 10,
-              background: "#2563eb", color: "#fff",
-              fontSize: 12, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase",
-              padding: "15px 32px", textDecoration: "none",
-              transition: "background 0.2s, gap 0.2s",
+              background: "linear-gradient(135deg, #2563eb, #7c3aed)",
+              color: "#fff", fontSize: 12, fontWeight: 700, letterSpacing: "0.18em",
+              textTransform: "uppercase", padding: "15px 32px", textDecoration: "none",
+              transition: "opacity 0.2s, transform 0.2s", borderRadius: 2,
+              boxShadow: "0 0 32px rgba(37,99,235,0.25)",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = "#1d4ed8"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "#2563eb"; }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "0.85"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
           >
-            View Work <span>→</span>
+            View Work →
           </a>
 
           <a href="#contact" className="arrow-link">
             Get in touch <span>→</span>
           </a>
 
-          {/* Divider */}
-          <div style={{ width: 1, height: 32, background: "#1e1e1e", margin: "0 4px" }} />
+          <div style={{ width: 1, height: 28, background: "#1e1e1e", margin: "0 4px" }} />
 
-          {/* Social icons */}
-          <a
-            href="https://github.com/SohamBhattacharjee2003"
-            target="_blank" rel="noreferrer"
-            style={{ color: "#333", transition: "color 0.2s", display: "flex" }}
-            onMouseEnter={e => (e.currentTarget.style.color = "#f2f2f2")}
-            onMouseLeave={e => (e.currentTarget.style.color = "#333")}
-          >
-            <SiGithub size={20} />
+          <a href="https://github.com/SohamBhattacharjee2003" target="_blank" rel="noreferrer"
+            style={{ color: "#333", display: "flex", transition: "color 0.2s, transform 0.2s" }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#f2f2f2"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "#333"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}>
+            <SiGithub size={22} />
           </a>
-          <a
-            href="https://linkedin.com/in/sohambhattacharjee84"
-            target="_blank" rel="noreferrer"
-            style={{ color: "#333", transition: "color 0.2s", display: "flex" }}
-            onMouseEnter={e => (e.currentTarget.style.color = "#2563eb")}
-            onMouseLeave={e => (e.currentTarget.style.color = "#333")}
-          >
-            <SiLinkedin size={20} />
+          <a href="https://linkedin.com/in/sohambhattacharjee84" target="_blank" rel="noreferrer"
+            style={{ color: "#333", display: "flex", transition: "color 0.2s, transform 0.2s" }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#2563eb"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "#333"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}>
+            <SiLinkedin size={22} />
           </a>
         </div>
       </div>
 
       {/* Scroll hint */}
-      <div style={{
-        position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)",
-        display: "flex", flexDirection: "column", alignItems: "center", gap: 8, opacity: 0.3,
-      }}>
-        <span style={{ fontSize: 9, letterSpacing: "0.3em", textTransform: "uppercase", color: "#555" }}>Scroll</span>
-        <div style={{ width: 1, height: 32, background: "#444", animation: "pulse 2s ease infinite" }} />
+      <div style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, opacity: 0.25 }}>
+        <span style={{ fontSize: 9, letterSpacing: "0.3em", textTransform: "uppercase", color: "#666" }}>Scroll</span>
+        <div style={{ width: 1, height: 36, background: "linear-gradient(to bottom, #2563eb, transparent)", animation: "scroll-line 2s ease infinite" }} />
       </div>
 
       <style>{`
-        @keyframes spin  { to { transform: rotate(360deg); } }
-        @keyframes pulse { 0%,100% { opacity:0.3; } 50% { opacity:1; } }
+        .orb { position:absolute; border-radius:50%; filter:blur(100px); pointer-events:none; animation:float 12s ease-in-out infinite; }
+        .orb-blue   { width:520px; height:520px; background:radial-gradient(circle,rgba(37,99,235,0.18) 0%,transparent 70%); animation-delay:0s; }
+        .orb-purple { width:440px; height:440px; background:radial-gradient(circle,rgba(124,58,237,0.15) 0%,transparent 70%); animation-delay:-4s; }
+        .orb-cyan   { width:280px; height:280px; background:radial-gradient(circle,rgba(6,182,212,0.12) 0%,transparent 70%); animation-delay:-8s; }
+        @keyframes float { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-40px) scale(1.05);} }
+        @keyframes pulse-dot { 0%,100%{opacity:1;box-shadow:0 0 8px #22c55e;} 50%{opacity:0.6;box-shadow:0 0 16px #22c55e;} }
+        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+        @keyframes scroll-line { 0%{opacity:0;transform:scaleY(0);transform-origin:top;} 50%{opacity:1;transform:scaleY(1);} 100%{opacity:0;transform:scaleY(1);transform-origin:bottom;} }
       `}</style>
     </section>
   );
