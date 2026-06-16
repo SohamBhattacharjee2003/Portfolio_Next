@@ -1,252 +1,202 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa";
 
 const roles = ["Full-Stack Developer", "Mobile Engineer", "AI Builder", "Open Source Contributor"];
 
 export default function Hero() {
-  const [roleIdx, setRoleIdx]     = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [deleting, setDeleting]   = useState(false);
-  const containerRef              = useRef<HTMLElement>(null);
+  const [typed, setTyped]   = useState("");
+  const [roleIdx, setRole]  = useState(0);
+  const [del, setDel]       = useState(false);
 
   useEffect(() => {
     const word  = roles[roleIdx];
-    const speed = deleting ? 40 : 85;
+    const speed = del ? 38 : 78;
     const t = setTimeout(() => {
-      if (!deleting && displayed === word) { setTimeout(() => setDeleting(true), 2200); return; }
-      if (deleting && displayed === "")   { setDeleting(false); setRoleIdx(i => (i + 1) % roles.length); return; }
-      setDisplayed(deleting ? word.slice(0, displayed.length - 1) : word.slice(0, displayed.length + 1));
+      if (!del && typed === word) { setTimeout(() => setDel(true), 2000); return; }
+      if (del  && typed === "")  { setDel(false); setRole(i => (i + 1) % roles.length); return; }
+      setTyped(del ? word.slice(0, typed.length - 1) : word.slice(0, typed.length + 1));
     }, speed);
     return () => clearTimeout(t);
-  }, [displayed, deleting, roleIdx]);
+  }, [typed, del, roleIdx]);
 
-  useEffect(() => {
-    const els = containerRef.current?.querySelectorAll<HTMLElement>("[data-anim]");
-    els?.forEach((el, i) => {
-      el.style.opacity = "0";
-      el.style.transform = "translateY(20px)";
-      el.style.transition = `opacity 0.7s ease ${i * 0.1}s, transform 0.7s ease ${i * 0.1}s`;
-      setTimeout(() => { el.style.opacity = "1"; el.style.transform = "translateY(0)"; }, 50);
-    });
-  }, []);
+  function hOn(e: React.MouseEvent, s: Partial<CSSStyleDeclaration>) {
+    Object.assign((e.currentTarget as HTMLElement).style, s);
+  }
 
   return (
-    <section id="hero" ref={containerRef} style={{ minHeight:"100vh", display:"flex", alignItems:"center", position:"relative", overflow:"hidden", background:"var(--bg)" }}>
+    <section id="hero" style={{ background: "var(--bg)", minHeight: "100vh", paddingBottom: 80 }}>
 
-      {/* Orbs */}
-      <div style={{ position:"absolute", top:"-10%", left:"-5%", width:600, height:600, borderRadius:"50%", filter:"blur(130px)", background:"radial-gradient(circle,var(--orb-blue) 0%,transparent 70%)", pointerEvents:"none" }} />
-      <div style={{ position:"absolute", bottom:"-20%", right:"-5%", width:500, height:500, borderRadius:"50%", filter:"blur(130px)", background:"radial-gradient(circle,var(--orb-purple) 0%,transparent 70%)", animation:"hFloat 18s ease-in-out infinite reverse", pointerEvents:"none" }} />
+      {/* ── BANNER + PHOTO ── */}
+      <div style={{ position: "relative" }}>
 
-      {/* Grid bg */}
-      <div style={{ position:"absolute", inset:0, pointerEvents:"none", backgroundImage:"linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px)", backgroundSize:"64px 64px" }} />
+        {/* Banner */}
+        <div style={{
+          marginTop: 72,
+          marginLeft: 20,
+          marginRight: 20,
+          height: 380,
+          borderRadius: 20,
+          overflow: "hidden",
+          position: "relative",
+          background: "linear-gradient(155deg, #050a14 0%, #0c1628 28%, #0a1f35 55%, #100726 80%, #040609 100%)",
+        }}>
+          {/* Blurred orbs */}
+          <div style={{ position:"absolute", top:-90, right:60, width:420, height:420, borderRadius:"50%", background:"radial-gradient(circle,rgba(37,99,235,0.28) 0%,transparent 70%)", filter:"blur(60px)", animation:"bFloat 13s ease-in-out infinite" }} />
+          <div style={{ position:"absolute", bottom:-80, right:260, width:320, height:320, borderRadius:"50%", background:"radial-gradient(circle,rgba(124,58,237,0.32) 0%,transparent 70%)", filter:"blur(50px)", animation:"bFloat 18s ease-in-out infinite reverse" }} />
+          <div style={{ position:"absolute", top:"35%", right:"18%", width:180, height:180, borderRadius:"50%", background:"radial-gradient(circle,rgba(6,182,212,0.18) 0%,transparent 70%)", filter:"blur(36px)" }} />
 
-      {/* Left accent bar */}
-      <div style={{ position:"absolute", left:0, top:"25%", width:3, height:"45%", background:"linear-gradient(to bottom,transparent,var(--accent),transparent)", pointerEvents:"none" }} />
+          {/* Subtle dot grid */}
+          <div style={{ position:"absolute", inset:0, backgroundImage:"radial-gradient(rgba(255,255,255,0.06) 1px,transparent 1px)", backgroundSize:"28px 28px", pointerEvents:"none" }} />
 
-      <div className="container" style={{ position:"relative", zIndex:1, paddingTop:100, paddingBottom:80 }}>
-        <div className="h-grid">
+          {/* Geometric SVG — right side */}
+          <svg style={{ position:"absolute", right:64, top:"50%", transform:"translateY(-50%)", opacity:0.1, animation:"bSpin 60s linear infinite" }} width="270" height="270" viewBox="0 0 270 270" fill="none">
+            <circle cx="135" cy="135" r="128" stroke="white" strokeWidth="0.5"/>
+            <circle cx="135" cy="135" r="92"  stroke="white" strokeWidth="0.5" strokeDasharray="3 10"/>
+            <circle cx="135" cy="135" r="56"  stroke="white" strokeWidth="0.5"/>
+            <circle cx="135" cy="135" r="22"  stroke="white" strokeWidth="1.2"/>
+            <line x1="7"   y1="135" x2="263" y2="135" stroke="white" strokeWidth="0.4"/>
+            <line x1="135" y1="7"   x2="135" y2="263" stroke="white" strokeWidth="0.4"/>
+            <line x1="39"  y1="39"  x2="231" y2="231" stroke="white" strokeWidth="0.3" strokeDasharray="2 8"/>
+            <line x1="231" y1="39"  x2="39"  y2="231" stroke="white" strokeWidth="0.3" strokeDasharray="2 8"/>
+          </svg>
 
-          {/* ── TEXT ── */}
-          <div className="h-left">
-            <div data-anim className="h-status">
-              <span className="h-dot" />
-              <span>Available for Work · 2026</span>
+          {/* Code glyphs */}
+          {([
+            { t:"{ }",  top:"14%", left:"8%",  op:0.07, fs:22 },
+            { t:"</>",  top:"62%", left:"28%", op:0.06, fs:17 },
+            { t:"=>",   top:"22%", left:"52%", op:0.07, fs:19 },
+            { t:"[ ]",  top:"70%", left:"65%", op:0.05, fs:16 },
+            { t:"···",  top:"40%", left:"16%", op:0.06, fs:20 },
+          ] as { t:string; top:string; left:string; op:number; fs:number }[]).map(({ t, top, left, op, fs }) => (
+            <div key={t} style={{ position:"absolute", top, left, color:"#fff", opacity:op, fontSize:fs, fontFamily:"monospace", fontWeight:700, pointerEvents:"none" }}>
+              {t}
             </div>
+          ))}
 
-            <div data-anim className="h-name">
-              <div className="h-name-line h-name-white">SOHAM</div>
-              <div className="h-name-line h-name-grad">BHATTACHARJEE</div>
-            </div>
-
-            <div data-anim className="h-role">
-              {displayed}<span className="h-cursor" />
-            </div>
-
-            <p data-anim className="h-bio">
-              Building across web, mobile &amp; AI — WebRTC collaborative IDEs, OpenAI-powered chatbots, cross-platform Flutter apps. Hackathon finalist. Kolkata, India.
-            </p>
-
-            <div data-anim className="h-tags">
-              {["Full Stack Dev", "Mobile / Flutter", "AI Integration"].map(t => (
-                <span key={t} className="h-tag">{t}</span>
-              ))}
-            </div>
-
-            <div data-anim className="h-ctas">
-              <a href="#projects" className="h-btn">View Work →</a>
-              <a href="#contact" className="arrow-link">Get in touch <span>→</span></a>
-              <div className="h-sep" />
-              <a href="https://github.com/SohamBhattacharjee2003" target="_blank" rel="noreferrer" className="h-icon">
-                <SiGithub size={20} />
-              </a>
-              <a href="https://linkedin.com/in/sohambhattacharjee84" target="_blank" rel="noreferrer" className="h-icon h-icon-li">
-                <FaLinkedinIn size={18} />
-              </a>
-            </div>
+          {/* Bottom label strip */}
+          <div style={{ position:"absolute", bottom:0, left:0, right:0, height:64, background:"linear-gradient(to top,rgba(0,0,0,0.45),transparent)", display:"flex", alignItems:"flex-end", paddingBottom:18, paddingLeft:200, gap:12, pointerEvents:"none" }}>
+            <span style={{ fontSize:9, fontWeight:700, letterSpacing:"0.35em", textTransform:"uppercase", color:"rgba(255,255,255,0.22)" }}>
+              Full Stack · Mobile · AI · Open Source
+            </span>
           </div>
+        </div>
 
-          {/* ── PHOTO ── */}
-          <div data-anim className="h-photo-section">
-            <div className="h-photo-wrap">
-              {/* Spinning rings — inside the wrap, sized 100% */}
-              <div className="h-ring h-ring-1" />
-              <div className="h-ring h-ring-2" />
-              <div className="h-arc" />
-              <div className="h-img">
-                <Image src="/profile.png" alt="Soham Bhattacharjee" fill style={{ objectFit:"cover", objectPosition:"center top" }} priority />
-              </div>
-            </div>
-            <div className="h-badge">
-              <span className="h-badge-dot" />
-              <span>Open to Work</span>
-            </div>
-          </div>
-
+        {/* Profile photo — overlapping bottom of banner */}
+        <div style={{
+          position: "absolute",
+          bottom: -65,
+          left: 60,
+          width: 130, height: 130,
+          borderRadius: "50%",
+          overflow: "hidden",
+          border: "5px solid var(--bg)",
+          boxShadow: "0 0 0 1px var(--border), 0 8px 32px rgba(0,0,0,0.3)",
+          zIndex: 10,
+          transition: "border-color 0.35s",
+        }}>
+          <Image src="/profile.png" alt="Soham Bhattacharjee" fill style={{ objectFit:"cover", objectPosition:"center top" }} priority />
         </div>
       </div>
 
-      {/* Scroll */}
-      <div style={{ position:"absolute", bottom:24, left:"50%", transform:"translateX(-50%)", display:"flex", flexDirection:"column", alignItems:"center", gap:6, opacity:0.25, pointerEvents:"none" }}>
-        <span style={{ fontSize:8, letterSpacing:"0.35em", textTransform:"uppercase", color:"var(--text-muted)" }}>Scroll</span>
-        <div style={{ width:1, height:30, background:"linear-gradient(to bottom,var(--accent),transparent)", animation:"hLine 2s ease infinite" }} />
+      {/* ── TEXT ── */}
+      <div className="container" style={{ paddingTop: 104, paddingBottom: 0 }}>
+
+        {/* Name */}
+        <h1 style={{
+          fontFamily: "var(--font-serif)",
+          fontStyle: "italic",
+          fontWeight: 400,
+          fontSize: "clamp(44px,5.8vw,84px)",
+          lineHeight: 1.04,
+          color: "var(--text)",
+          letterSpacing: "-0.015em",
+          marginBottom: 18,
+        }}>
+          Soham Bhattacharjee
+        </h1>
+
+        {/* Tagline — mixed serif + sans */}
+        <div style={{ marginBottom: 28 }}>
+          <div style={{
+            fontFamily: "var(--font-serif)",
+            fontStyle: "italic",
+            fontWeight: 300,
+            fontSize: "clamp(22px,2.8vw,42px)",
+            color: "var(--text-muted)",
+            lineHeight: 1,
+          }}>
+            Building Scalable,
+          </div>
+          <div style={{
+            fontFamily: "var(--font-sans)",
+            fontWeight: 700,
+            fontSize: "clamp(28px,3.8vw,62px)",
+            color: "var(--text)",
+            lineHeight: 1.04,
+            letterSpacing: "-0.025em",
+          }}>
+            Digital Products.
+          </div>
+        </div>
+
+        {/* Typed role */}
+        <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:24, minHeight:24 }}>
+          <span style={{ width:6, height:6, borderRadius:"50%", background:"var(--accent-green)", boxShadow:"0 0 8px var(--accent-green)", flexShrink:0, display:"inline-block" }} />
+          <span style={{ fontSize:13, color:"var(--text-muted)", fontWeight:400 }}>
+            {typed}
+            <span style={{ display:"inline-block", width:2, height:13, background:"var(--accent)", marginLeft:2, verticalAlign:"middle", animation:"bBlink 0.9s step-end infinite" }} />
+          </span>
+        </div>
+
+        {/* Bio */}
+        <p style={{ fontSize:15, color:"var(--text-muted)", lineHeight:1.85, maxWidth:600, marginBottom:36 }}>
+          Full-stack engineer and hackathon finalist shipping across web, mobile &amp; AI. From WebRTC collaborative IDEs to OpenAI-powered platforms and cross-platform Flutter apps — I care about clean architecture, real-time systems, and production-ready code.
+        </p>
+
+        {/* CTAs + social icons */}
+        <div style={{ display:"flex", alignItems:"center", gap:10, flexWrap:"wrap", marginBottom:52 }}>
+          <a href="#projects"
+            style={{ display:"inline-flex", alignItems:"center", gap:8, background:"var(--text)", color:"var(--bg)", fontSize:11, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase", padding:"13px 28px", borderRadius:40, textDecoration:"none", transition:"opacity 0.2s" }}
+            onMouseEnter={e => hOn(e, { opacity:"0.8" })} onMouseLeave={e => hOn(e, { opacity:"1" })}>
+            View Projects →
+          </a>
+          <a href="#contact"
+            style={{ display:"inline-flex", alignItems:"center", fontSize:11, fontWeight:600, letterSpacing:"0.12em", textTransform:"uppercase", color:"var(--text-muted)", textDecoration:"none", border:"1px solid var(--border)", padding:"13px 28px", borderRadius:40, transition:"color 0.2s,border-color 0.2s" }}
+            onMouseEnter={e => { hOn(e, { color:"var(--text)", borderColor:"var(--text)" }); }}
+            onMouseLeave={e => { hOn(e, { color:"var(--text-muted)", borderColor:"var(--border)" }); }}>
+            Get in Touch
+          </a>
+          <div style={{ width:1, height:22, background:"var(--border)", margin:"0 4px" }} />
+          <a href="https://github.com/SohamBhattacharjee2003" target="_blank" rel="noreferrer"
+            style={{ width:38, height:38, borderRadius:"50%", border:"1px solid var(--border)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--text-muted)", textDecoration:"none", transition:"color 0.2s,border-color 0.2s" }}
+            onMouseEnter={e => { hOn(e, { color:"var(--text)", borderColor:"var(--text)" }); }}
+            onMouseLeave={e => { hOn(e, { color:"var(--text-muted)", borderColor:"var(--border)" }); }}>
+            <SiGithub size={16} />
+          </a>
+          <a href="https://linkedin.com/in/sohambhattacharjee84" target="_blank" rel="noreferrer"
+            style={{ width:38, height:38, borderRadius:"50%", border:"1px solid var(--border)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--text-muted)", textDecoration:"none", transition:"color 0.2s,border-color 0.2s" }}
+            onMouseEnter={e => { hOn(e, { color:"#0a66c2", borderColor:"#0a66c2" }); }}
+            onMouseLeave={e => { hOn(e, { color:"var(--text-muted)", borderColor:"var(--border)" }); }}>
+            <FaLinkedinIn size={15} />
+          </a>
+        </div>
+
+        {/* Location */}
+        <div style={{ display:"flex", alignItems:"center", gap:8, fontSize:11, fontWeight:600, letterSpacing:"0.25em", textTransform:"uppercase", color:"var(--text-faint)" }}>
+          <svg width="10" height="13" viewBox="0 0 10 13" fill="currentColor">
+            <path d="M5 0C2.24 0 0 2.24 0 5c0 3.75 5 8 5 8s5-4.25 5-8c0-2.76-2.24-5-5-5zm0 6.5C4.17 6.5 3.5 5.83 3.5 5S4.17 3.5 5 3.5 6.5 4.17 6.5 5 5.83 6.5 5 6.5z"/>
+          </svg>
+          Kolkata, India · Available for Work
+        </div>
       </div>
 
       <style>{`
-        @keyframes hFloat  { 0%,100%{transform:translateY(0);}    50%{transform:translateY(-24px);}  }
-        @keyframes hSpin   { to{transform:rotate(360deg);}                                            }
-        @keyframes hSpinR  { to{transform:rotate(-360deg);}                                           }
-        @keyframes hArc    { to{transform:rotate(360deg);}                                            }
-        @keyframes hPulse  { 0%,100%{opacity:1;} 50%{opacity:0.4;}                                   }
-        @keyframes hBlink  { 0%,100%{opacity:1;} 50%{opacity:0;}                                     }
-        @keyframes hLine   { 0%{opacity:0;transform:scaleY(0);transform-origin:top;} 50%{opacity:1;transform:scaleY(1);} 100%{opacity:0;} }
-
-        /* ── Two-column grid ── */
-        .h-grid {
-          display: grid;
-          grid-template-columns: minmax(0,1fr) 280px;
-          gap: 56px;
-          align-items: center;
-        }
-        .h-left { display:flex; flex-direction:column; min-width:0; }
-
-        /* Status */
-        .h-status {
-          display:inline-flex; align-items:center; gap:10px; margin-bottom:24px;
-          font-size:11px; font-weight:600; letter-spacing:0.28em; text-transform:uppercase;
-          color:var(--text-muted);
-        }
-        .h-dot {
-          width:7px; height:7px; border-radius:50%; flex-shrink:0;
-          background:var(--accent-green); box-shadow:0 0 8px var(--accent-green);
-          animation:hPulse 2s ease infinite;
-        }
-
-        /* Name — key fix: overflow hidden + nowrap on the container, let font scale */
-        .h-name { display:flex; flex-direction:column; line-height:0.88; font-weight:900; letter-spacing:-0.03em; margin-bottom:20px; overflow:hidden; }
-        .h-name-line { white-space:nowrap; font-size:clamp(32px,5.2vw,88px); }
-        .h-name-white { color:var(--text); }
-        .h-name-grad  {
-          background:linear-gradient(110deg,#2563eb 0%,#06b6d4 50%,#7c3aed 100%);
-          -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-        }
-
-        /* Role */
-        .h-role {
-          display:flex; align-items:center; min-height:26px; margin-bottom:20px;
-          font-size:15px; font-weight:400; color:var(--text-muted); letter-spacing:0.02em;
-        }
-        .h-cursor {
-          display:inline-block; width:2px; height:17px; background:var(--accent);
-          margin-left:2px; animation:hBlink 0.9s step-end infinite;
-        }
-
-        /* Bio */
-        .h-bio {
-          font-size:14px; color:var(--text-muted); line-height:1.8;
-          max-width:100%; margin-bottom:24px;
-        }
-
-        /* Tags */
-        .h-tags { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; }
-        .h-tag {
-          font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
-          padding:5px 12px; border:1px solid var(--border); background:var(--bg-card); color:var(--text-muted);
-        }
-
-        /* CTAs */
-        .h-ctas { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
-        .h-btn {
-          display:inline-flex; align-items:center; gap:8px;
-          background:linear-gradient(135deg,#2563eb,#7c3aed); color:#fff;
-          font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase;
-          padding:12px 24px; text-decoration:none; border-radius:3px;
-          box-shadow:0 0 28px rgba(37,99,235,0.3); transition:opacity 0.2s,transform 0.2s;
-          white-space:nowrap;
-        }
-        .h-btn:hover { opacity:0.85; transform:translateY(-2px); }
-        .h-sep { width:1px; height:22px; background:var(--border); flex-shrink:0; }
-        .h-icon { color:var(--text-faint); display:flex; transition:color 0.2s,transform 0.2s; }
-        .h-icon:hover { color:var(--text); transform:translateY(-2px); }
-        .h-icon-li:hover { color:#0a66c2 !important; }
-
-        /* ── Photo section ── */
-        .h-photo-section {
-          position:relative; display:flex; flex-direction:column; align-items:center;
-        }
-        .h-photo-wrap {
-          position:relative; width:280px; height:280px;
-          display:flex; align-items:center; justify-content:center;
-        }
-        .h-ring {
-          position:absolute; border-radius:50%;
-        }
-        .h-ring-1 {
-          inset:0; border:1px solid var(--border);
-          animation:hSpin 32s linear infinite;
-        }
-        .h-ring-2 {
-          inset:10%; border:1px dashed rgba(37,99,235,0.3);
-          animation:hSpinR 20s linear infinite;
-        }
-        .h-arc {
-          position:absolute; inset:8%; border-radius:50%;
-          background:conic-gradient(from 200deg,transparent 0%,rgba(37,99,235,0.5) 15%,rgba(124,58,237,0.4) 30%,transparent 31%);
-          animation:hArc 5s linear infinite; filter:blur(3px);
-        }
-        .h-img {
-          position:relative; width:64%; height:64%; border-radius:50%; overflow:hidden; z-index:2;
-          border:2.5px solid var(--border);
-          box-shadow:0 0 0 5px var(--bg), 0 0 40px rgba(37,99,235,0.2), 0 0 80px rgba(124,58,237,0.1);
-        }
-        .h-badge {
-          margin-top:16px;
-          background:linear-gradient(135deg,#2563eb,#7c3aed); border-radius:20px;
-          padding:7px 16px; display:flex; align-items:center; gap:8px;
-          box-shadow:0 4px 20px rgba(37,99,235,0.3); border:1px solid rgba(255,255,255,0.1);
-        }
-        .h-badge-dot {
-          width:6px; height:6px; border-radius:50%; flex-shrink:0;
-          background:#22c55e; box-shadow:0 0 6px #22c55e; animation:hPulse 2s ease infinite;
-        }
-        .h-badge span:last-child {
-          font-size:10px; font-weight:700; color:#fff; letter-spacing:0.1em; text-transform:uppercase;
-        }
-
-        /* ── Responsive ── */
-        @media (max-width:820px) {
-          .h-grid { grid-template-columns:1fr; gap:40px; }
-          .h-photo-section { margin:0 auto; }
-          .h-photo-wrap { width:220px; height:220px; }
-          .h-name-line { font-size:clamp(36px,9vw,72px); white-space:normal; }
-        }
-        @media (max-width:480px) {
-          .h-photo-wrap { width:180px; height:180px; }
-          .h-name-line { font-size:clamp(30px,11vw,56px); }
-          .h-ctas { gap:10px; }
-        }
+        @keyframes bFloat { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-22px)} }
+        @keyframes bSpin  { to{transform:translateY(-50%) rotate(360deg)} }
+        @keyframes bBlink { 0%,100%{opacity:1} 50%{opacity:0} }
       `}</style>
     </section>
   );

@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -20,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={spaceGrotesk.variable}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${cormorant.variable}`}>
       <head>
         {/* Prevent flash of wrong theme */}
         <script
