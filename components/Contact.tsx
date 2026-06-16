@@ -1,5 +1,15 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { SiGithub } from "react-icons/si";
+import { FaLinkedinIn } from "react-icons/fa";
+import { HiMail, HiPhone } from "react-icons/hi";
+
+const links = [
+  { label: "Email",    value: "sohambhattacharjee84@gmail.com",      href: "mailto:sohambhattacharjee84@gmail.com", Icon: HiMail,        color: "#2563eb" },
+  { label: "GitHub",   value: "github.com/SohamBhattacharjee2003",   href: "https://github.com/SohamBhattacharjee2003", Icon: SiGithub,   color: "#f2f2f2" },
+  { label: "LinkedIn", value: "linkedin.com/in/sohambhattacharjee84", href: "https://linkedin.com/in/sohambhattacharjee84", Icon: FaLinkedinIn, color: "#0a66c2" },
+  { label: "Phone",    value: "+91 98323 05604",                      href: "tel:+919832305604", Icon: HiPhone,       color: "#22c55e" },
+];
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null);
@@ -16,140 +26,119 @@ export default function Contact() {
   }, []);
 
   const inputStyle: React.CSSProperties = {
-    width: "100%",
-    background: "transparent",
-    border: "none",
-    borderBottom: "1px solid #1e1e1e",
-    padding: "14px 0",
-    fontSize: 14,
-    color: "#f2f2f2",
-    outline: "none",
-    transition: "border-color 0.25s",
-    fontFamily: "inherit",
+    width: "100%", background: "transparent", border: "none",
+    borderBottom: "1px solid #1e1e1e", padding: "14px 0",
+    fontSize: 14, color: "#f2f2f2", outline: "none",
+    transition: "border-color 0.25s", fontFamily: "inherit",
   };
 
   const labelStyle: React.CSSProperties = {
-    fontSize: 10,
-    fontWeight: 700,
-    letterSpacing: "0.25em",
-    textTransform: "uppercase" as const,
-    color: "#444",
-    display: "block",
-    marginBottom: 0,
+    fontSize: 10, fontWeight: 700, letterSpacing: "0.25em",
+    textTransform: "uppercase" as const, color: "#333", display: "block",
   };
 
-  const links = [
-    { label: "Email",    value: "sohambhattacharjee84@gmail.com",     href: "mailto:sohambhattacharjee84@gmail.com" },
-    { label: "GitHub",   value: "github.com/SohamBhattacharjee2003",  href: "https://github.com/SohamBhattacharjee2003" },
-    { label: "LinkedIn", value: "linkedin.com/in/sohambhattacharjee84", href: "https://linkedin.com/in/sohambhattacharjee84" },
-    { label: "Phone",    value: "+91 98323 05604",                     href: "tel:+919832305604" },
-  ];
-
   return (
-    <section id="contact" ref={ref} className="reveal" style={{ padding: "72px 0 60px", background: "#050505" }}>
-      <div className="container">
+    <section id="contact" ref={ref} className="reveal" style={{ padding: "72px 0 60px", background: "#050505", position: "relative", overflow: "hidden" }}>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
-          <div style={{ width: 28, height: 2, background: "#2563eb" }} />
-          <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: "#2563eb" }}>
-            Contact
-          </span>
+      {/* bg orbs */}
+      <div style={{ position: "absolute", bottom: "-20%", left: "-10%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle,rgba(37,99,235,0.07) 0%,transparent 70%)", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", top: "10%", right: "-5%", width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle,rgba(124,58,237,0.06) 0%,transparent 70%)", pointerEvents: "none" }} />
+
+      <div className="container">
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 40 }}>
+          <div style={{ width: 28, height: 2, background: "linear-gradient(90deg,#2563eb,#7c3aed)" }} />
+          <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: "#2563eb" }}>Contact</span>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
 
           {/* Left */}
           <div>
-            <h2 style={{ fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 800, lineHeight: 0.9, letterSpacing: "-0.02em", color: "#f2f2f2", marginBottom: 32 }}>
-              LET&apos;S<br />
-              <span style={{ color: "#2563eb" }}>WORK</span><br />
-              TOGETHER<span style={{ color: "#2563eb" }}>.</span>
+            <h2 style={{ fontSize: "clamp(34px, 5vw, 60px)", fontWeight: 800, lineHeight: 0.9, letterSpacing: "-0.02em", marginBottom: 28 }}>
+              <span style={{ color: "#f2f2f2" }}>LET&apos;S</span><br />
+              <span style={{ background: "linear-gradient(110deg,#2563eb,#7c3aed)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>WORK</span><br />
+              <span style={{ color: "#f2f2f2" }}>TOGETHER.</span>
             </h2>
 
-            <p style={{ fontSize: 14, color: "#555", lineHeight: 1.8, maxWidth: 340, marginBottom: 48 }}>
-              Open to full-time roles, freelance projects, and collaborations. Based in Kolkata, West Bengal — available remotely. I typically respond within 24 hours.
+            <p style={{ fontSize: 14, color: "#444", lineHeight: 1.85, maxWidth: 340, marginBottom: 40 }}>
+              Open to full-time roles, freelance projects &amp; collaborations. Based in Kolkata — available remotely. Usually respond within 24 hours.
             </p>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              {links.map(({ label, value, href }) => (
+            {/* Contact links */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              {links.map(({ label, value, href, Icon, color }) => (
                 <a
                   key={label}
                   href={href}
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noreferrer" : undefined}
-                  style={{ display: "flex", alignItems: "center", gap: 16, textDecoration: "none" }}
-                  onMouseEnter={(e) => {
-                    const line = e.currentTarget.querySelector(".link-line") as HTMLElement;
-                    const val = e.currentTarget.querySelector(".link-val") as HTMLElement;
-                    if (line) { line.style.width = "40px"; line.style.background = "#2563eb"; }
-                    if (val) val.style.color = "#2563eb";
+                  style={{ display: "flex", alignItems: "center", gap: 14, padding: "12px 16px", textDecoration: "none", borderRadius: 8, transition: "background 0.2s" }}
+                  onMouseEnter={e => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.background = "#0d0d0d";
+                    const val = el.querySelector(".cval") as HTMLElement;
+                    if (val) val.style.color = color;
                   }}
-                  onMouseLeave={(e) => {
-                    const line = e.currentTarget.querySelector(".link-line") as HTMLElement;
-                    const val = e.currentTarget.querySelector(".link-val") as HTMLElement;
-                    if (line) { line.style.width = "24px"; line.style.background = "#2a2a2a"; }
-                    if (val) val.style.color = "#555";
+                  onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.background = "transparent";
+                    const val = el.querySelector(".cval") as HTMLElement;
+                    if (val) val.style.color = "#444";
                   }}
                 >
-                  <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#2a2a2a", width: 64, flexShrink: 0 }}>{label}</span>
-                  <span className="link-line" style={{ height: 1, width: 24, background: "#2a2a2a", flexShrink: 0, transition: "all 0.25s" }} />
-                  <span className="link-val" style={{ fontSize: 12, color: "#555", transition: "color 0.25s" }}>{value}</span>
+                  <div style={{ width: 36, height: 36, borderRadius: 8, background: "#111", border: "1px solid #1e1e1e", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <Icon style={{ fontSize: 16, color }} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#333", marginBottom: 2 }}>{label}</div>
+                    <div className="cval" style={{ fontSize: 12, color: "#444", transition: "color 0.2s" }}>{value}</div>
+                  </div>
                 </a>
               ))}
             </div>
           </div>
 
           {/* Right: form */}
-          <form onSubmit={(e) => e.preventDefault()} style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+          <form onSubmit={e => e.preventDefault()} style={{ display: "flex", flexDirection: "column", gap: 28 }}>
             {[
               { id: "name",  label: "Name",  type: "text",  placeholder: "Your name" },
               { id: "email", label: "Email", type: "email", placeholder: "your@email.com" },
             ].map(({ id, label, type, placeholder }) => (
               <div key={id}>
                 <label htmlFor={id} style={labelStyle}>{label}</label>
-                <input
-                  id={id} type={type} placeholder={placeholder}
+                <input id={id} type={type} placeholder={placeholder}
                   style={{ ...inputStyle, marginTop: 8 }}
-                  onFocus={(e) => (e.currentTarget.style.borderBottomColor = "#2563eb")}
-                  onBlur={(e) => (e.currentTarget.style.borderBottomColor = "#1e1e1e")}
-                />
+                  onFocus={e => (e.currentTarget.style.borderBottomColor = "#2563eb")}
+                  onBlur={e => (e.currentTarget.style.borderBottomColor = "#1e1e1e")} />
               </div>
             ))}
-
             <div>
               <label htmlFor="message" style={labelStyle}>Message</label>
-              <textarea
-                id="message" rows={4} placeholder="Tell me about your project or opportunity..."
+              <textarea id="message" rows={4} placeholder="Tell me about your project or opportunity..."
                 style={{ ...inputStyle, resize: "none", marginTop: 8 }}
-                onFocus={(e) => (e.currentTarget.style.borderBottomColor = "#2563eb")}
-                onBlur={(e) => (e.currentTarget.style.borderBottomColor = "#1e1e1e")}
-              />
+                onFocus={e => (e.currentTarget.style.borderBottomColor = "#2563eb")}
+                onBlur={e => (e.currentTarget.style.borderBottomColor = "#1e1e1e")} />
             </div>
-
-            <button
-              type="submit"
+            <button type="submit"
               style={{
                 display: "inline-flex", alignItems: "center", gap: 10, alignSelf: "flex-start",
-                background: "#2563eb", color: "#fff",
+                background: "linear-gradient(135deg,#2563eb,#7c3aed)", color: "#fff",
                 fontSize: 12, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase",
-                padding: "16px 32px", border: "none", cursor: "none",
-                transition: "background 0.25s", fontFamily: "inherit",
+                padding: "15px 32px", border: "none", cursor: "none", borderRadius: 4,
+                transition: "opacity 0.2s, transform 0.2s", fontFamily: "inherit",
+                boxShadow: "0 0 24px rgba(37,99,235,0.2)",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#1d4ed8")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "#2563eb")}
-            >
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "0.85"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}>
               Send Message →
             </button>
           </form>
         </div>
 
-        <div style={{ marginTop: 100, paddingTop: 24, borderTop: "1px solid #141414", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ fontSize: 11, color: "#2a2a2a", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-            © 2026 Soham Bhattacharjee
-          </span>
-          <span style={{ fontSize: 11, color: "#2a2a2a", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-            Kolkata, West Bengal · Available for Work
-          </span>
+        {/* Footer */}
+        <div style={{ marginTop: 72, paddingTop: 24, borderTop: "1px solid #111", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ fontSize: 11, color: "#222", letterSpacing: "0.15em", textTransform: "uppercase" }}>© 2026 Soham Bhattacharjee</span>
+          <span style={{ fontSize: 11, color: "#222", letterSpacing: "0.15em", textTransform: "uppercase" }}>Kolkata, India · Available for Work</span>
         </div>
       </div>
     </section>
