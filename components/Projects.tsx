@@ -5,132 +5,93 @@ import { FiExternalLink } from "react-icons/fi";
 
 const projects = [
   {
-    title: "Mx Icons",
-    badge: "3.7k+ downloads",
-    desc: "Open source | Beautiful icons for React projects. A modern, lightweight React icon library with beautiful SVG icons. Built with React · Optimised for Production.",
-    tags: ["JavaScript", "React", "SVG", "Rollup.js", "Vite", "NPM"],
-    live: "#",
-    github: "#",
-    gradient: "linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%)",
-    accent: "#e94560",
+    title: "Mentor-Connect",
+    date: "Dec 2024",
+    desc: "Full-stack platform intelligently matching mentors and mentees by domain expertise. OpenAI-powered chatbot for 24/7 guidance. Containerised with Docker, deployed on AWS EC2.",
+    tags: ["ReactJS", "TailwindCSS", "Firebase", "Flask", "OpenAI API", "Docker", "AWS EC2"],
+    live: null,
+    github: "https://github.com/SohamBhattacharjee2003",
+    gradient: "linear-gradient(135deg,#1a0800 0%,#2d1200 50%,#ff6b0015 100%)",
+    accent: "#ff6b00",
   },
   {
-    title: "Secure2FA",
-    badge: null,
-    desc: "A robust two-factor authentication system implementing Time-based One-Time Password (TOTP) for enhanced application security.",
-    tags: ["JavaScript", "React", "Node.js", "MongoDB", "Java", "SpringBoot", "Spring Security"],
-    live: "#",
-    github: "#",
-    gradient: "linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #2d1b69 100%)",
-    accent: "#00ff88",
+    title: "AI Chatbot — Text & Image",
+    date: "Jan 2025",
+    desc: "Multimodal AI platform unifying conversational AI and on-demand image synthesis via GPT & DALL-E. Stripe subscription billing, ImageKit CDN for optimised delivery.",
+    tags: ["React.js", "Node.js", "Express.js", "MongoDB", "OpenAI API", "ImageKit", "Stripe"],
+    live: null,
+    github: "https://github.com/SohamBhattacharjee2003",
+    gradient: "linear-gradient(135deg,#001a0e 0%,#00301a 50%,#10a37f18 100%)",
+    accent: "#10a37f",
   },
   {
-    title: "BlogZone",
-    badge: null,
-    desc: "A modern full-stack blogging platform with rich text editing, user authentication, and a clean reading experience.",
-    tags: ["React", "Node.js", "MongoDB", "Express", "JWT"],
-    live: "#",
-    github: "#",
-    gradient: "linear-gradient(135deg, #0d1117 0%, #161b22 50%, #21262d 100%)",
-    accent: "#58a6ff",
+    title: "ReqNest — API Sandbox",
+    date: "Mar 2025",
+    desc: "Cross-platform Flutter app for mobile-native API testing — full REST support, live response introspection. Flask/Gunicorn backend returns latency, status codes, formatted JSON.",
+    tags: ["Flutter", "Flask", "Supabase", "REST APIs", "JWT", "Gunicorn"],
+    live: null,
+    github: "https://github.com/SohamBhattacharjee2003",
+    gradient: "linear-gradient(135deg,#00101e 0%,#00203e 50%,#027dff18 100%)",
+    accent: "#027dff",
   },
   {
-    title: "AI Dashboard",
-    badge: null,
-    desc: "Real-time analytics dashboard powered by AI — ingests live data, surfaces insights, and auto-generates reports.",
-    tags: ["Next.js", "OpenAI", "PostgreSQL", "TypeScript"],
+    title: "SyncIDE — Collaborative IDE",
+    date: "Apr 2025",
+    desc: "Browser-based IDE for real-time pair programming. Live multi-cursor sync over WebSocket with sub-second latency. Peer-to-peer video calling via WebRTC built directly into the editor.",
+    tags: ["React.js", "Node.js", "Express.js", "MongoDB", "WebSocket", "WebRTC", "Tailwind CSS"],
     live: "#",
-    github: "#",
-    gradient: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
-    accent: "#a78bfa",
+    github: "https://github.com/SohamBhattacharjee2003",
+    gradient: "linear-gradient(135deg,#001810 0%,#00301e 50%,#00c98318 100%)",
+    accent: "#00c983",
   },
 ];
 
-function BrowserMockup({ gradient, accent, badge }: { gradient: string; accent: string; badge: string | null }) {
+function BrowserMockup({ gradient, accent, date }: { gradient: string; accent: string; date: string }) {
   return (
-    <div style={{
-      borderRadius: 10,
-      overflow: "hidden",
-      border: "1px solid #2a2a2a",
-      background: "#111",
-      flexShrink: 0,
-    }}>
-      {/* Browser chrome */}
-      <div style={{
-        background: "#1a1a1a",
-        padding: "10px 14px",
-        display: "flex",
-        alignItems: "center",
-        gap: 10,
-        borderBottom: "1px solid #2a2a2a",
-      }}>
+    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid #1e1e1e", background: "#0a0a0a", flexShrink: 0 }}>
+      {/* Chrome bar */}
+      <div style={{ background: "#141414", padding: "10px 14px", display: "flex", alignItems: "center", gap: 10, borderBottom: "1px solid #1e1e1e" }}>
         <div style={{ display: "flex", gap: 6 }}>
-          <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#ff5f57" }} />
-          <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#febc2e" }} />
-          <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#28c840" }} />
+          {["#ff5f57","#febc2e","#28c840"].map(c => <div key={c} style={{ width: 10, height: 10, borderRadius: "50%", background: c }} />)}
         </div>
-        <div style={{
-          flex: 1,
-          background: "#252525",
-          borderRadius: 4,
-          height: 22,
-          display: "flex",
-          alignItems: "center",
-          paddingLeft: 10,
-        }}>
-          <span style={{ fontSize: 10, color: "#555" }}>https://project.vercel.app</span>
+        <div style={{ flex: 1, background: "#1e1e1e", borderRadius: 4, height: 22, display: "flex", alignItems: "center", paddingLeft: 10 }}>
+          <span style={{ fontSize: 10, color: "#444" }}>https://github.com/SohamBhattacharjee2003</span>
         </div>
       </div>
 
-      {/* Screenshot area */}
-      <div style={{
-        height: 220,
-        background: gradient,
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}>
-        {/* Decorative inner UI hint */}
-        <div style={{ position: "absolute", inset: 0, opacity: 0.15, backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(255,255,255,0.03) 30px, rgba(255,255,255,0.03) 31px)" }} />
-        <div style={{
-          width: "80%",
-          height: "70%",
-          border: `1px solid ${accent}33`,
-          borderRadius: 6,
-          background: `${accent}08`,
-          display: "flex",
-          flexDirection: "column",
-          gap: 8,
-          padding: 14,
-        }}>
-          <div style={{ width: "60%", height: 8, background: `${accent}40`, borderRadius: 4 }} />
-          <div style={{ width: "100%", height: 5, background: "#ffffff10", borderRadius: 4 }} />
-          <div style={{ width: "80%", height: 5, background: "#ffffff08", borderRadius: 4 }} />
-          <div style={{ width: "90%", height: 5, background: "#ffffff08", borderRadius: 4 }} />
-          <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
-            <div style={{ width: 60, height: 20, background: accent, borderRadius: 4, opacity: 0.8 }} />
-            <div style={{ width: 60, height: 20, border: `1px solid ${accent}66`, borderRadius: 4 }} />
+      {/* Screen */}
+      <div style={{ height: 220, background: gradient, position: "relative", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+
+        {/* scanline texture */}
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px)", pointerEvents: "none" }} />
+
+        {/* mock UI */}
+        <div style={{ width: "82%", height: "72%", border: `1px solid ${accent}33`, borderRadius: 8, background: `${accent}06`, padding: 16, display: "flex", flexDirection: "column", gap: 10, position: "relative", zIndex: 1 }}>
+          {/* nav bar mockup */}
+          <div style={{ display: "flex", gap: 8, alignItems: "center", paddingBottom: 10, borderBottom: `1px solid ${accent}20` }}>
+            <div style={{ width: 24, height: 24, borderRadius: 4, background: accent, opacity: 0.8 }} />
+            <div style={{ flex: 1, height: 6, background: `${accent}30`, borderRadius: 4 }} />
+            <div style={{ width: 48, height: 20, background: `${accent}40`, borderRadius: 4 }} />
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 7, flex: 1 }}>
+            <div style={{ width: "55%", height: 7, background: `${accent}55`, borderRadius: 4 }} />
+            <div style={{ width: "100%", height: 5, background: "#ffffff08", borderRadius: 4 }} />
+            <div style={{ width: "80%",  height: 5, background: "#ffffff06", borderRadius: 4 }} />
+            <div style={{ width: "90%",  height: 5, background: "#ffffff05", borderRadius: 4 }} />
+            <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
+              <div style={{ width: 70, height: 22, background: accent, borderRadius: 5, opacity: 0.85 }} />
+              <div style={{ width: 70, height: 22, border: `1px solid ${accent}44`, borderRadius: 5 }} />
+            </div>
           </div>
         </div>
 
-        {badge && (
-          <div style={{
-            position: "absolute",
-            top: 12,
-            left: 12,
-            background: "rgba(0,0,0,0.75)",
-            border: "1px solid #333",
-            borderRadius: 4,
-            padding: "4px 10px",
-            fontSize: 11,
-            fontWeight: 600,
-            color: "#f2f2f2",
-            backdropFilter: "blur(8px)",
-          }}>
-            {badge}
-          </div>
-        )}
+        {/* date badge */}
+        <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(0,0,0,0.6)", border: "1px solid #2a2a2a", borderRadius: 4, padding: "3px 8px", fontSize: 10, fontWeight: 600, color: "#666", backdropFilter: "blur(8px)" }}>
+          {date}
+        </div>
+
+        {/* accent glow bottom */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 60, background: `linear-gradient(to top, ${accent}18, transparent)`, pointerEvents: "none" }} />
       </div>
     </div>
   );
@@ -144,108 +105,55 @@ function ProjectCard({ p }: { p: typeof projects[0] }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        border: `1px dashed ${hovered ? "#333" : "#222"}`,
-        borderRadius: 12,
+        border: `1px solid ${hovered ? p.accent + "44" : "#1a1a1a"}`,
+        borderRadius: 14,
         padding: 28,
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         gap: 40,
         alignItems: "center",
-        transition: "border-color 0.25s, background 0.25s",
+        transition: "border-color 0.3s, background 0.3s, box-shadow 0.3s",
         background: hovered ? "#0a0a0a" : "transparent",
-        cursor: "default",
+        boxShadow: hovered ? `0 0 40px ${p.accent}10` : "none",
       }}
     >
-      {/* Left: browser mockup */}
-      <BrowserMockup gradient={p.gradient} accent={p.accent} badge={p.badge} />
+      <BrowserMockup gradient={p.gradient} accent={p.accent} date={p.date} />
 
-      {/* Right: project info */}
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-
-        {/* Title + buttons */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
-          <h3 style={{
-            fontSize: "clamp(22px, 2.5vw, 30px)",
-            fontWeight: 700,
-            color: "#f2f2f2",
-            letterSpacing: "-0.02em",
-          }}>
+        {/* Title row */}
+        <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+          <h3 style={{ fontSize: "clamp(18px, 2vw, 24px)", fontWeight: 700, color: hovered ? p.accent : "#f2f2f2", transition: "color 0.3s", letterSpacing: "-0.02em" }}>
             {p.title}
           </h3>
-
           <div style={{ display: "flex", gap: 8, marginLeft: "auto" }}>
-            <a
-              href={p.live}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-                padding: "6px 14px",
-                border: "1px solid #2a2a2a",
-                borderRadius: 6,
-                fontSize: 12,
-                fontWeight: 600,
-                color: "#f2f2f2",
-                background: "#111",
-                textDecoration: "none",
-                transition: "border-color 0.2s, color 0.2s",
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#2563eb"; (e.currentTarget as HTMLAnchorElement).style.color = "#2563eb"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#2a2a2a"; (e.currentTarget as HTMLAnchorElement).style.color = "#f2f2f2"; }}
-            >
-              <FiExternalLink size={13} />
-              Live
-            </a>
-            <a
-              href={p.github}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-                padding: "6px 14px",
-                border: "1px solid #2a2a2a",
-                borderRadius: 6,
-                fontSize: 12,
-                fontWeight: 600,
-                color: "#f2f2f2",
-                background: "#111",
-                textDecoration: "none",
-                transition: "border-color 0.2s, color 0.2s",
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#2563eb"; (e.currentTarget as HTMLAnchorElement).style.color = "#2563eb"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#2a2a2a"; (e.currentTarget as HTMLAnchorElement).style.color = "#f2f2f2"; }}
-            >
-              <SiGithub size={13} />
-              GitHub
+            {p.live && (
+              <a href={p.live} target="_blank" rel="noreferrer"
+                style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 14px", border: `1px solid #2a2a2a`, borderRadius: 6, fontSize: 11, fontWeight: 600, color: "#aaa", background: "#111", textDecoration: "none", transition: "all 0.2s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = p.accent; el.style.color = p.accent; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#2a2a2a"; el.style.color = "#aaa"; }}>
+                <FiExternalLink size={12} /> Live
+              </a>
+            )}
+            <a href={p.github} target="_blank" rel="noreferrer"
+              style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 14px", border: "1px solid #2a2a2a", borderRadius: 6, fontSize: 11, fontWeight: 600, color: "#aaa", background: "#111", textDecoration: "none", transition: "all 0.2s" }}
+              onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#f2f2f2"; el.style.color = "#f2f2f2"; }}
+              onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#2a2a2a"; el.style.color = "#aaa"; }}>
+              <SiGithub size={12} /> GitHub
             </a>
           </div>
         </div>
 
-        {/* Description */}
-        <p style={{ fontSize: 13, color: "#666", lineHeight: 1.7 }}>
-          {p.desc}
-        </p>
+        <p style={{ fontSize: 13, color: "#555", lineHeight: 1.8 }}>{p.desc}</p>
 
-        {/* Tech tags */}
         <div>
-          <p style={{ fontSize: 11, fontWeight: 700, color: "#444", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 10 }}>
+          <p style={{ fontSize: 10, fontWeight: 700, color: "#333", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 10 }}>
             Technologies Used:
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-            {p.tags.map((tag) => (
-              <span
-                key={tag}
-                style={{
-                  fontSize: 11,
-                  fontWeight: 600,
-                  color: "#888",
-                  padding: "4px 12px",
-                  border: "1px solid #222",
-                  borderRadius: 4,
-                  letterSpacing: "0.04em",
-                  background: "#0d0d0d",
-                }}
-              >
+            {p.tags.map(tag => (
+              <span key={tag} style={{ fontSize: 11, fontWeight: 500, color: "#555", padding: "4px 11px", border: "1px solid #1e1e1e", borderRadius: 4, background: "#0d0d0d", transition: "border-color 0.2s, color 0.2s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = p.accent + "55"; el.style.color = p.accent; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#1e1e1e"; el.style.color = "#555"; }}>
                 {tag}
               </span>
             ))}
@@ -264,39 +172,38 @@ export default function Projects() {
     if (!el) return;
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { el.classList.add("in"); obs.disconnect(); } },
-      { threshold: 0.05 }
+      { threshold: 0.04 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
   return (
-    <section id="projects" ref={ref} className="reveal" style={{ padding: "120px 0", background: "#050505" }}>
-      <div className="container">
+    <section id="projects" ref={ref} className="reveal" style={{ padding: "72px 0", background: "#050505", position: "relative", overflow: "hidden" }}>
 
-        {/* Header */}
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 64 }}>
+      <div style={{ position: "absolute", top: "-20%", right: "-5%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle,rgba(37,99,235,0.05) 0%,transparent 70%)", pointerEvents: "none" }} />
+
+      <div className="container">
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 40 }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
-              <div style={{ width: 28, height: 2, background: "#2563eb" }} />
-              <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: "#2563eb" }}>
-                Selected Work
-              </span>
+              <div style={{ width: 28, height: 2, background: "linear-gradient(90deg,#2563eb,#7c3aed)" }} />
+              <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: "#2563eb" }}>Selected Work</span>
             </div>
-            <h2 style={{ fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 800, lineHeight: 0.92, color: "#f2f2f2", letterSpacing: "-0.02em" }}>
-              PROJECTS<span style={{ color: "#2563eb" }}>.</span>
+            <h2 style={{ fontSize: "clamp(34px, 5vw, 60px)", fontWeight: 800, lineHeight: 0.92, letterSpacing: "-0.02em" }}>
+              <span style={{ background: "linear-gradient(110deg,#f2f2f2 40%,#7c3aed 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                PROJECTS.
+              </span>
             </h2>
           </div>
-          <span style={{ fontSize: 80, fontWeight: 800, color: "#111", letterSpacing: "-0.04em", lineHeight: 1 }}>
-            {projects.length.toString().padStart(2, "0")}
+          <span style={{ fontSize: 72, fontWeight: 800, color: "#111", letterSpacing: "-0.04em", lineHeight: 1 }}>
+            {String(projects.length).padStart(2, "0")}
           </span>
         </div>
 
-        {/* Cards */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          {projects.map((p) => <ProjectCard key={p.title} p={p} />)}
+        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          {projects.map(p => <ProjectCard key={p.title} p={p} />)}
         </div>
-
       </div>
     </section>
   );
