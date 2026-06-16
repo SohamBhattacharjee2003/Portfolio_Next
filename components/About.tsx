@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 
 const highlights = [
   { label: "Full-Stack Web Development",             color: "#2563eb" },
-  { label: "Mobile Apps — Flutter & React Native",   color: "#7c3aed" },
+  { label: "Cross-Platform Mobile Apps",             color: "#7c3aed" },
   { label: "AI / LLM Integration",                  color: "#06b6d4" },
   { label: "Real-Time Systems — WebSocket & WebRTC", color: "#2563eb" },
   { label: "Cloud Deployment — AWS EC2, Docker",     color: "#7c3aed" },

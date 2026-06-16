@@ -27,17 +27,6 @@ const projects = [
     accent: "#10a37f",
   },
   {
-    title: "ReqNest — API Sandbox",
-    date: "Mar 2025",
-    desc: "Cross-platform Flutter app for mobile-native API testing — full REST support, live response introspection. Flask/Gunicorn backend returns latency, status codes, formatted JSON.",
-    tags: ["Flutter", "Flask", "Supabase", "REST APIs", "JWT", "Gunicorn"],
-    live: null,
-    github: "https://github.com/SohamBhattacharjee2003",
-    darkGradient: "linear-gradient(135deg,#00101e 0%,#00203e 50%,#027dff18 100%)",
-    lightGradient: "linear-gradient(135deg,#eef4ff 0%,#dbeafe 50%,#027dff12 100%)",
-    accent: "#027dff",
-  },
-  {
     title: "SyncIDE — Collaborative IDE",
     date: "Apr 2025",
     desc: "Browser-based IDE for real-time pair programming. Live multi-cursor sync over WebSocket with sub-second latency. Peer-to-peer video calling via WebRTC built directly into the editor.",

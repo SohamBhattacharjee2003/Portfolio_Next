@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import {
   SiReact, SiTypescript, SiJavascript, SiNodedotjs, SiPython,
-  SiFlutter, SiMongodb, SiMysql, SiFirebase, SiSupabase,
+  SiMongodb, SiMysql, SiFirebase, SiSupabase,
   SiDocker, SiGit, SiTailwindcss, SiFlask, SiFastapi,
   SiExpress, SiPostman, SiWebrtc, SiC, SiCplusplus,
 } from "react-icons/si";
@@ -18,7 +18,6 @@ const row1: Skill[] = [
   { name: "Node.js",    Icon: SiNodedotjs,   color: "#539E43" },
   { name: "Python",     Icon: SiPython,      color: "#F7CC42" },
   { name: "Java",       Icon: FaJava,        color: "#E76F00" },
-  { name: "Flutter",    Icon: SiFlutter,     color: "#54C5F8" },
   { name: "C++",        Icon: SiCplusplus,   color: "#00599C" },
   { name: "C",          Icon: SiC,           color: "#A8B9CC" },
   { name: "Tailwind",   Icon: SiTailwindcss, color: "#06B6D4" },

@@ -5,7 +5,7 @@ import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa";
 
 const roles = ["Full-Stack Developer", "Mobile Engineer", "AI Builder", "Open Source Contributor"];
-const stack = ["TypeScript", "Next.js", "Flutter", "Node", "Python", "AWS"];
+const stack = ["TypeScript", "Next.js", "React", "Node", "Python", "AWS"];
 
 export default function Hero() {
   const [typed, setTyped]  = useState("");
@@ -33,7 +33,7 @@ export default function Hero() {
       {/* ── BANNER ── */}
       <div className="container" style={{ paddingTop: 92 }}>
         <div className="hero-banner" style={{
-          height: 300,
+          height: 230,
           borderRadius: 18,
           overflow: "hidden",
           position: "relative",
@@ -99,7 +99,7 @@ export default function Hero() {
             </h2>
 
             <p className="hero-bio">
-              Full-stack engineer &amp; hackathon finalist shipping across web, mobile and AI — WebRTC collaborative IDEs, OpenAI-powered platforms, cross-platform Flutter apps. I care about clean architecture and production-ready code.
+              Full-stack engineer &amp; hackathon finalist shipping across web, mobile and AI — WebRTC collaborative IDEs, OpenAI-powered platforms, cross-platform mobile apps. I care about clean architecture and production-ready code.
             </p>
 
             <div className="hero-ctas">
@@ -154,14 +154,13 @@ export default function Hero() {
         /* identity row */
         .hero-id { display:flex; align-items:flex-end; gap:24px; margin-top:-52px; position:relative; z-index:5; }
         .hero-photo {
-          width:118px; height:118px; border-radius:50%; overflow:hidden; position:relative; flex-shrink:0;
-          border:5px solid var(--bg); box-shadow:0 0 0 1px var(--border), 0 8px 30px rgba(0,0,0,0.3);
-          transition:border-color 0.35s;
+          width:122px; height:122px; border-radius:50%; overflow:hidden; position:relative; flex-shrink:0;
+          border:5px solid #ffffff; box-shadow:0 0 0 1px var(--border), 0 8px 30px rgba(0,0,0,0.3);
         }
-        .hero-id-text { padding-bottom:6px; min-width:0; }
+        .hero-id-text { padding-bottom:8px; min-width:0; }
         .hero-name {
-          font-family:var(--font-sans); font-weight:700; font-size:clamp(26px,3.6vw,46px);
-          letter-spacing:-0.02em; line-height:1; color:var(--text); margin-bottom:10px;
+          font-family:var(--font-sans); font-weight:700; font-size:clamp(32px,4.8vw,62px);
+          letter-spacing:-0.025em; line-height:1; color:var(--text); margin-bottom:12px;
         }
         .hero-type { display:flex; align-items:center; gap:9px; font-size:13px; color:var(--text-muted); min-height:18px; }
         .hero-caret { display:inline-block; width:2px; height:13px; background:var(--accent); margin-left:2px; vertical-align:middle; animation:bBlink 0.9s step-end infinite; }
