@@ -156,7 +156,7 @@ export default function Hero() {
           width:122px; height:122px; border-radius:50%; overflow:hidden; position:relative; flex-shrink:0;
           border:5px solid #ffffff; box-shadow:0 0 0 1px var(--border), 0 8px 30px rgba(0,0,0,0.3);
         }
-        .hero-id-text { padding-bottom:8px; min-width:0; }
+        .hero-id-text { padding-bottom:8px; min-width:0; transform:translateY(26px); }
         .hero-name {
           font-family:var(--font-sans); font-weight:700; font-size:clamp(32px,4.8vw,62px);
           letter-spacing:-0.025em; line-height:1; color:var(--text); margin-bottom:12px;
@@ -199,6 +199,7 @@ export default function Hero() {
         @media (max-width:820px) {
           .hero-grid { grid-template-columns:1fr; gap:32px; }
           .hero-id { flex-direction:column; align-items:flex-start; gap:14px; }
+          .hero-id-text { transform:none; }
         }
       `}</style>
     </section>

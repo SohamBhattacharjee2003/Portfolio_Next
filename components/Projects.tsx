@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { SiGithub } from "react-icons/si";
 import { FiExternalLink } from "react-icons/fi";
 
@@ -9,6 +10,8 @@ const projects = [
     date: "Dec 2024",
     desc: "Full-stack platform intelligently matching mentors and mentees by domain expertise. OpenAI-powered chatbot for 24/7 guidance. Containerised with Docker, deployed on AWS EC2.",
     tags: ["ReactJS", "TailwindCSS", "Firebase", "Flask", "OpenAI API", "Docker", "AWS EC2"],
+    image: "/mentor_connect.png",
+    url: "github.com/SohamBhattacharjee2003",
     live: null,
     github: "https://github.com/SohamBhattacharjee2003",
     darkGradient: "linear-gradient(135deg,#1a0800 0%,#2d1200 50%,#ff6b0015 100%)",
@@ -16,30 +19,47 @@ const projects = [
     accent: "#ff6b00",
   },
   {
-    title: "AI Chatbot — Text & Image",
-    date: "Jan 2025",
-    desc: "Multimodal AI platform unifying conversational AI and on-demand image synthesis via GPT & DALL-E. Stripe subscription billing, ImageKit CDN for optimised delivery.",
-    tags: ["React.js", "Node.js", "Express.js", "MongoDB", "OpenAI API", "ImageKit", "Stripe"],
-    live: null,
-    github: "https://github.com/SohamBhattacharjee2003",
-    darkGradient: "linear-gradient(135deg,#001a0e 0%,#00301a 50%,#10a37f18 100%)",
-    lightGradient: "linear-gradient(135deg,#edfaf5 0%,#d1f5e8 50%,#10a37f12 100%)",
-    accent: "#10a37f",
-  },
-  {
     title: "SyncIDE — Collaborative IDE",
     date: "Apr 2025",
     desc: "Browser-based IDE for real-time pair programming. Live multi-cursor sync over WebSocket with sub-second latency. Peer-to-peer video calling via WebRTC built directly into the editor.",
     tags: ["React.js", "Node.js", "Express.js", "MongoDB", "WebSocket", "WebRTC", "Tailwind CSS"],
+    image: "/sync_logo.png",
+    url: "github.com/SohamBhattacharjee2003",
     live: "#",
     github: "https://github.com/SohamBhattacharjee2003",
     darkGradient: "linear-gradient(135deg,#001810 0%,#00301e 50%,#00c98318 100%)",
     lightGradient: "linear-gradient(135deg,#edfff8 0%,#d0faea 50%,#00c98312 100%)",
     accent: "#00c983",
   },
+  {
+    title: "Traviante — AI Travel Concierge",
+    date: "Mar 2026",
+    desc: "A conversational destination-discovery experience. Customers chat with Aria, Traviante's AI concierge — describing the trip they want in natural language or uploading a photo of a place they love — and get ranked destination cards surfaced inline. OpenAI CLIP maps images and text into one 512-dimensional embedding space for true multimodal search, while a Groq-hosted LLM runs a tool-calling loop to extract preferences and narrate the matches, degrading to deterministic offline NLU when key-free.",
+    tags: ["Python", "OpenAI CLIP", "Groq LLM", "PyTorch", "FastAPI", "Next.js"],
+    image: "/traviante.png",
+    url: "traviante-search-engine.vercel.app",
+    live: "https://traviante-search-engine.vercel.app",
+    github: "https://github.com/SohamBhattacharjee2003",
+    darkGradient: "linear-gradient(135deg,#14110d 0%,#241f17 50%,#9a846818 100%)",
+    lightGradient: "linear-gradient(135deg,#faf8f4 0%,#f0ebe2 50%,#9a846812 100%)",
+    accent: "#9a8468",
+  },
+  {
+    title: "July Coffee AI Barista",
+    date: "Oct 2025",
+    desc: "A production-grade RAG-powered assistant for julycoffee.in that turns confused first-time buyers into confident coffee drinkers. It recommends products by taste, brewing method and experience level, answers brewing questions, detects complaints and escalates to the human team, and handles order-status queries via the Shopify Admin API — streaming responses token-by-token with Redis-backed session memory.",
+    tags: ["Next.js", "RAG", "Vector Search", "Redis", "Shopify API", "Vercel"],
+    image: "/rag_chat_system.png",
+    url: "rag-based-chat-application-r1zq.vercel.app",
+    live: "https://rag-based-chat-application-r1zq.vercel.app",
+    github: "https://github.com/SohamBhattacharjee2003",
+    darkGradient: "linear-gradient(135deg,#1a0c02 0%,#2d1606 50%,#8b451318 100%)",
+    lightGradient: "linear-gradient(135deg,#fdf6ef 0%,#f5e6d6 50%,#8b451312 100%)",
+    accent: "#8b4513",
+  },
 ];
 
-function BrowserMockup({ darkGradient, lightGradient, accent, date }: { darkGradient: string; lightGradient: string; accent: string; date: string }) {
+function BrowserMockup({ image, title, url, darkGradient, lightGradient, accent, date }: { image: string; title: string; url: string; darkGradient: string; lightGradient: string; accent: string; date: string }) {
   const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
@@ -59,37 +79,20 @@ function BrowserMockup({ darkGradient, lightGradient, accent, date }: { darkGrad
         <div style={{ display:"flex", gap:6 }}>
           {["#ff5f57","#febc2e","#28c840"].map(c => <div key={c} style={{ width:10, height:10, borderRadius:"50%", background:c }} />)}
         </div>
-        <div style={{ flex:1, background:"var(--bg-card)", borderRadius:4, height:22, display:"flex", alignItems:"center", paddingLeft:10, border:"1px solid var(--border)" }}>
-          <span style={{ fontSize:10, color:"var(--text-faint)" }}>github.com/SohamBhattacharjee2003</span>
+        <div style={{ flex:1, background:"var(--bg-card)", borderRadius:4, height:22, display:"flex", alignItems:"center", paddingLeft:10, border:"1px solid var(--border)", overflow:"hidden" }}>
+          <span style={{ fontSize:10, color:"var(--text-faint)", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{url}</span>
         </div>
       </div>
 
       {/* Screen */}
-      <div style={{ height:220, background:gradient, position:"relative", display:"flex", alignItems:"center", justifyContent:"center", overflow:"hidden" }}>
-        <div style={{ position:"absolute", inset:0, backgroundImage:"repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.04) 2px,rgba(0,0,0,0.04) 4px)", pointerEvents:"none" }} />
+      <div style={{ height:240, background:gradient, position:"relative", overflow:"hidden" }}>
+        <Image src={image} alt={title} fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit:"cover", objectPosition:"center top" }} />
 
-        <div style={{ width:"82%", height:"72%", border:`1px solid ${accent}33`, borderRadius:8, background:`${accent}06`, padding:16, display:"flex", flexDirection:"column", gap:10, position:"relative", zIndex:1 }}>
-          <div style={{ display:"flex", gap:8, alignItems:"center", paddingBottom:10, borderBottom:`1px solid ${accent}20` }}>
-            <div style={{ width:24, height:24, borderRadius:4, background:accent, opacity:0.8 }} />
-            <div style={{ flex:1, height:6, background:`${accent}30`, borderRadius:4 }} />
-            <div style={{ width:48, height:20, background:`${accent}40`, borderRadius:4 }} />
-          </div>
-          <div style={{ display:"flex", flexDirection:"column", gap:7, flex:1 }}>
-            <div style={{ width:"55%", height:7, background:`${accent}55`, borderRadius:4 }} />
-            <div style={{ width:"100%", height:5, background:`${accent}15`, borderRadius:4 }} />
-            <div style={{ width:"80%", height:5, background:`${accent}10`, borderRadius:4 }} />
-            <div style={{ display:"flex", gap:8, marginTop:4 }}>
-              <div style={{ width:70, height:22, background:accent, borderRadius:5, opacity:0.85 }} />
-              <div style={{ width:70, height:22, border:`1px solid ${accent}44`, borderRadius:5 }} />
-            </div>
-          </div>
-        </div>
-
-        <div style={{ position:"absolute", top:10, right:10, background:"var(--bg-elevated)", border:"1px solid var(--border)", borderRadius:4, padding:"3px 8px", fontSize:10, fontWeight:600, color:"var(--text-muted)", backdropFilter:"blur(8px)" }}>
+        <div style={{ position:"absolute", top:10, right:10, background:"var(--bg-elevated)", border:"1px solid var(--border)", borderRadius:4, padding:"3px 8px", fontSize:10, fontWeight:600, color:"var(--text-muted)", backdropFilter:"blur(8px)", zIndex:2 }}>
           {date}
         </div>
 
-        <div style={{ position:"absolute", bottom:0, left:0, right:0, height:60, background:`linear-gradient(to top,${accent}18,transparent)`, pointerEvents:"none" }} />
+        <div style={{ position:"absolute", bottom:0, left:0, right:0, height:60, background:`linear-gradient(to top,${accent}18,transparent)`, pointerEvents:"none", zIndex:1 }} />
       </div>
     </div>
   );
@@ -111,7 +114,7 @@ function ProjectCard({ p }: { p: typeof projects[0] }) {
         boxShadow: hovered ? `0 0 40px ${p.accent}10` : "none",
       }}
     >
-      <BrowserMockup darkGradient={p.darkGradient} lightGradient={p.lightGradient} accent={p.accent} date={p.date} />
+      <BrowserMockup image={p.image} title={p.title} url={p.url} darkGradient={p.darkGradient} lightGradient={p.lightGradient} accent={p.accent} date={p.date} />
 
       <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
         <div style={{ display:"flex", alignItems:"center", gap:12, flexWrap:"wrap" }}>
