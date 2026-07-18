@@ -57,7 +57,7 @@ export default function Hero() {
               Software Engineer
             </div>
             <div style={{ fontFamily:"var(--font-serif)", fontStyle:"italic", fontWeight:400, fontSize:"clamp(26px,3.4vw,46px)", lineHeight:1.05, color:"rgba(255,255,255,0.92)" }}>
-              I build things<br/>for the web &amp; beyond.
+              I design &amp; build<br/>for the web &amp; beyond.
             </div>
           </div>
 
@@ -94,11 +94,11 @@ export default function Hero() {
           {/* Left — statement + bio + CTAs */}
           <div>
             <h2 className="hero-statement">
-              Building <span className="hero-serif">scalable</span> digital products <span className="hero-dim">end&nbsp;to&nbsp;end.</span>
+              Building <span className="hero-serif">scalable</span> digital products, <span className="hero-dim">end&nbsp;to&nbsp;end.</span>
             </h2>
 
             <p className="hero-bio">
-              Full-stack engineer &amp; hackathon finalist shipping across web, mobile and AI — WebRTC collaborative IDEs, OpenAI-powered platforms, cross-platform mobile apps. I care about clean architecture and production-ready code.
+              Full-stack engineer and Smart India Hackathon finalist shipping across web, mobile, and AI — from real-time collaborative IDEs over WebRTC to RAG and OpenAI-powered platforms deployed on AWS. I care about clean architecture and code that holds up in production.
             </p>
 
             <div className="hero-ctas">

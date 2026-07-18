@@ -8,7 +8,7 @@ const projects = [
   {
     title: "Mentor-Connect",
     date: "Dec 2024",
-    desc: "Full-stack platform intelligently matching mentors and mentees by domain expertise. OpenAI-powered chatbot for 24/7 guidance. Containerised with Docker, deployed on AWS EC2.",
+    desc: "A full-stack platform that pairs mentors and mentees by domain expertise, with an OpenAI-powered chatbot delivering round-the-clock guidance. Containerised with Docker and deployed on AWS EC2 for reliable, always-on access.",
     tags: ["ReactJS", "TailwindCSS", "Firebase", "Flask", "OpenAI API", "Docker", "AWS EC2"],
     image: "/mentor_connect.png",
     url: "github.com/SohamBhattacharjee2003",
@@ -85,8 +85,8 @@ function BrowserMockup({ image, title, url, darkGradient, lightGradient, accent,
       </div>
 
       {/* Screen */}
-      <div style={{ height:240, background:gradient, position:"relative", overflow:"hidden" }}>
-        <Image src={image} alt={title} fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit:"cover", objectPosition:"center top" }} />
+      <div style={{ aspectRatio:"16 / 10", background:gradient, position:"relative", overflow:"hidden" }}>
+        <Image src={image} alt={title} fill sizes="(max-width: 1024px) 100vw, 50vw" style={{ objectFit:"cover", objectPosition:"center top" }} />
 
         <div style={{ position:"absolute", top:10, right:10, background:"var(--bg-elevated)", border:"1px solid var(--border)", borderRadius:4, padding:"3px 8px", fontSize:10, fontWeight:600, color:"var(--text-muted)", backdropFilter:"blur(8px)", zIndex:2 }}>
           {date}
@@ -103,12 +103,12 @@ function ProjectCard({ p }: { p: typeof projects[0] }) {
 
   return (
     <div
+      className="proj-card"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         border: `1px solid ${hovered ? p.accent + "44" : "var(--border)"}`,
-        borderRadius:14, padding:28,
-        display:"grid", gridTemplateColumns:"1fr 1fr", gap:40, alignItems:"center",
+        borderRadius:14,
         transition:"border-color 0.3s, background-color 0.3s, box-shadow 0.3s",
         backgroundColor: hovered ? "var(--bg-elevated)" : "transparent",
         boxShadow: hovered ? `0 0 40px ${p.accent}10` : "none",
@@ -177,6 +177,12 @@ export default function Projects() {
 
   return (
     <section id="projects" ref={ref} className="reveal" style={{ padding:"72px 0", background:"var(--bg-2)", position:"relative", overflow:"hidden" }}>
+      <style>{`
+        .proj-card { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; padding:28px; }
+        @media (max-width:1024px) {
+          .proj-card { grid-template-columns:1fr; gap:24px; padding:20px; align-items:stretch; }
+        }
+      `}</style>
 
       <div style={{ position:"absolute", top:"-20%", right:"-5%", width:500, height:500, borderRadius:"50%", background:"radial-gradient(circle,var(--orb-blue) 0%,transparent 70%)", filter:"blur(80px)", pointerEvents:"none" }} />
 

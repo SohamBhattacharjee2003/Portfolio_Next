@@ -39,6 +39,10 @@ export default function Contact() {
 
   return (
     <section id="contact" ref={ref} className="reveal" style={{ padding:"72px 0 60px", background:"var(--bg-2)", position:"relative", overflow:"hidden" }}>
+      <style>{`
+        .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+        @media (max-width:860px) { .contact-grid { grid-template-columns:1fr; gap:40px; } }
+      `}</style>
 
       {/* Orbs */}
       <div style={{ position:"absolute", bottom:"-20%", left:"-10%", width:500, height:500, borderRadius:"50%", background:"radial-gradient(circle,var(--orb-blue) 0%,transparent 70%)", filter:"blur(80px)", pointerEvents:"none" }} />
@@ -57,7 +61,7 @@ export default function Contact() {
           <span style={{ fontSize:11, fontWeight:600, letterSpacing:"0.3em", textTransform:"uppercase", color:"var(--accent)" }}>Contact</span>
         </div>
 
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:80, alignItems:"start" }}>
+        <div className="contact-grid">
 
           {/* Left */}
           <div>
@@ -68,7 +72,7 @@ export default function Contact() {
             </h2>
 
             <p style={{ fontSize:14, color:"var(--text-muted)", lineHeight:1.85, maxWidth:340, marginBottom:40 }}>
-              Open to full-time roles, freelance projects &amp; collaborations. Based in Kolkata — available remotely. Usually respond within 24 hours.
+              Open to full-time roles, freelance work, and collaborations. Based in Kolkata and available remotely — I usually reply within 24 hours.
             </p>
 
             {/* Contact links */}
@@ -121,7 +125,7 @@ export default function Contact() {
             ))}
             <div>
               <label htmlFor="message" style={labelStyle}>Message</label>
-              <textarea id="message" rows={4} placeholder="Tell me about your project or opportunity..."
+              <textarea id="message" rows={4} placeholder="Tell me about the role, project, or idea you have in mind..."
                 style={{ ...inputStyle, resize:"none", marginTop:8 }}
                 onFocus={e => (e.currentTarget.style.borderBottomColor = "var(--accent)")}
                 onBlur={e => (e.currentTarget.style.borderBottomColor = "var(--input-border)")} />

@@ -26,6 +26,10 @@ export default function About() {
 
   return (
     <section id="about" ref={ref} className="reveal" style={{ padding:"72px 0", position:"relative", overflow:"hidden", background:"var(--bg)" }}>
+      <style>{`
+        .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start; }
+        @media (max-width:860px) { .about-grid { grid-template-columns:1fr; gap:40px; } }
+      `}</style>
 
       {/* Faint orb */}
       <div style={{ position:"absolute", top:"-20%", right:"-10%", width:500, height:500, borderRadius:"50%", background:"radial-gradient(circle,var(--orb-purple) 0%,transparent 70%)", filter:"blur(80px)", pointerEvents:"none" }} />
@@ -45,7 +49,7 @@ export default function About() {
           </span>
         </div>
 
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:72, alignItems:"start" }}>
+        <div className="about-grid">
 
           {/* Left */}
           <div>
@@ -56,10 +60,10 @@ export default function About() {
             </h2>
 
             <p style={{ fontSize:15, color:"var(--text-muted)", lineHeight:1.85, marginBottom:16, maxWidth:440 }}>
-              I&apos;m Soham — a full-stack developer who builds across web, mobile, and AI. From real-time collaborative tools to OpenAI-powered platforms, I care about shipping products that are fast, reliable, and well-crafted.
+              I&apos;m Soham — a full-stack engineer who builds across web, mobile, and AI. From real-time collaborative tools to multimodal AI search and RAG assistants, I turn ambitious ideas into products that are fast, reliable, and genuinely useful.
             </p>
             <p style={{ fontSize:15, color:"var(--text-muted)", lineHeight:1.85, maxWidth:440 }}>
-              Finalist at Smart India Hackathon 2024 · Passionate about clean architecture, real-time systems, and getting things into production.
+              Finalist at Smart India Hackathon 2024. I care about clean architecture, real-time systems, and the unglamorous work of shipping things into production — and keeping them running.
             </p>
 
             {/* SIH badge */}
